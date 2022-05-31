@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     game = new game_controller(this);
     worktable = new worktable_panel(this);
     exploration = new exploration_panel(this);
+    backpack = new backpack_panel(this);
 
 
 
@@ -51,4 +52,25 @@ void MainWindow::change_pic()
     ui->startButton->show();
     ui->loadButton->show();
     ui->quitButton->show();
+}
+
+void MainWindow::switch_panel(int panel_code, panel* sender)
+{
+    if (sender != nullptr) sender->close_panel();
+    switch(panel_code)
+    {
+    case 0:
+        // IMPLEMENT return to main
+        break;
+    case 1:
+        exploration->refresh_panel();
+        break;
+    case 2:
+        worktable->refresh_panel();
+        break;
+    case 3:
+        backpack->refresh_panel();
+        break;
+
+    }
 }
