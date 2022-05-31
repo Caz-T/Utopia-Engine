@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>worktable</class>
- <widget class="QWidget" name="worktable">
+ <class>worktable_panel</class>
+ <widget class="QWidget" name="worktable_panel">
   <property name="geometry">
    <rect>
     <x>0</x>
