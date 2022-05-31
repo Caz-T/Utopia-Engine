@@ -11,31 +11,34 @@ CONFIG += c++17
 SOURCES += \
     activation_dialog.cpp \
     connection_dialog.cpp \
-    exploration.cpp \
     exploration_dialog.cpp \
+    exploration_panel.cpp \
     game_controller.cpp \
     main.cpp \
     mainwindow.cpp \
-    worktable.cpp
+    worktable_panel.cpp
 
 HEADERS += \
     activation_dialog.h \
     connection_dialog.h \
-    exploration.h \
     exploration_dialog.h \
+    exploration_panel.h \
     game_controller.h \
     mainwindow.h \
-    worktable.h
+    worktable_panel.h
 
 FORMS += \
     activation_dialog.ui \
     connection_dialog.ui \
-    exploration.ui \
     exploration_dialog.ui \
+    exploration_panel.ui \
     mainwindow.ui \
-    worktable.ui
+    worktable_panel.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources/resources.qrc

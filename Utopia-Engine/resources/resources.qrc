@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file>StarryParadoxBackgroundPic.jpg</file>
+        <file>MainwindowBackground.jpg</file>
+        <file alias="minus_1_day">icons8-minus-1-day-100.png</file>
+    </qresource>
+    <qresource prefix="/dice">
+        <file alias="3">dice/icons8-3-c-96.png</file>
+        <file alias="5">dice/icons8-5-c-96.png</file>
+        <file alias="1">dice/icons8-number-1-96.png</file>
+        <file alias="2">dice/icons8-number-2-96.png</file>
+        <file alias="4">dice/icons8-number-4-96.png</file>
+        <file alias="6">dice/icons8-number-6-96.png</file>
+    </qresource>
+    <qresource prefix="/artifact">
+        <file>artifact/balance.png</file>
+        <file>artifact/battery.png</file>
+        <file>artifact/chassis.png</file>
+        <file>artifact/gate.png</file>
+        <file>artifact/mirror.png</file>
+        <file>artifact/scry.png</file>
+    </qresource>
+    <qresource prefix="/treasure">
+        <file>legendary_treasure/bracelet_of_ios.png</file>
+        <file>legendary_treasure/ice_plate.png</file>
+        <file>legendary_treasure/scale_of_the_infinity_wurm.png</file>
+        <file>legendary_treasure/shimmering_moonlace.png</file>
+        <file>legendary_treasure/the_ancient_record.png</file>
+        <file>legendary_treasure/the_molten_shard.png</file>
+    </qresource>
+    <qresource prefix="/event">
+        <file>event/icons8-aim-98.png</file>
+        <file>event/icons8-four-leaf-clover-96.png</file>
+        <file>event/icons8-monster-64.png</file>
+        <file>event/icons8-storm-80.png</file>
+    </qresource>
+</RCC>

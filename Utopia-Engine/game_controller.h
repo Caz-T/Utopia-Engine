@@ -7,9 +7,9 @@ class game_controller : public QObject
 {
     Q_OBJECT
 public:
-    game_controller();
-    ~game_controller();
+    explicit game_controller(QObject *parent = nullptr);
 
+signals:
 
 };
 

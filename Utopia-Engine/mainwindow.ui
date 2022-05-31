@@ -6,16 +6,91 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1300</width>
+    <height>947</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
-  <widget class="QStatusBar" name="statusbar"/>
+  <property name="minimumSize">
+   <size>
+    <width>1300</width>
+    <height>947</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1300</width>
+    <height>947</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>乌托邦引擎 - 构筑时间</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="background">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1300</width>
+      <height>947</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="startButton">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>410</y>
+      <width>231</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>开始游戏</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="loadButton">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>490</y>
+      <width>231</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>读取存档</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="quitButton">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>570</y>
+      <width>231</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>退出游戏</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections/>

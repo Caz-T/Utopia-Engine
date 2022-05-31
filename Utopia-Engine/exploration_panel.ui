@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>exploration_panel</class>
+ <widget class="QWidget" name="exploration_panel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1300</width>
+    <height>947</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLCDNumber" name="daysLeft">
+   <property name="geometry">
+    <rect>
+     <x>1160</x>
+     <y>10</y>
+     <width>81</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="smallDecimalPoint">
+    <bool>false</bool>
+   </property>
+   <property name="segmentStyle">
+    <enum>QLCDNumber::Flat</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>1050</x>
+     <y>0</y>
+     <width>221</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>距离末日降临还有                          天</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::AutoText</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="peak_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>240</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>苍髯群峰</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="wilds_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>340</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>无垠原野</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="marshes_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>440</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>根脉泥沼</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="canyon_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>540</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>晶岩峡谷</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="city_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>640</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>堕落古城</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="maw_button">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>740</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>熔岩石窟</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>180</y>
+     <width>151</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>选择一个探险的地点：</string>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="peak_bar">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>300</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="peak_bar_2">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>400</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="peak_bar_3">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>500</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="peak_bar_4">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>600</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="peak_bar_5">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>700</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="peak_bar_6">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>800</y>
+     <width>451</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>6</number>
+   </property>
+   <property name="value">
+    <number>0</number>
+   </property>
+   <property name="textVisible">
+    <bool>true</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>270</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>270</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>470</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>570</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>370</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>870</x>
+     <y>670</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>670</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>870</x>
+     <y>770</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>770</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_12">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>770</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>770</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>670</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_15">
+   <property name="geometry">
+    <rect>
+     <x>660</x>
+     <y>570</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_16">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>570</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_17">
+   <property name="geometry">
+    <rect>
+     <x>870</x>
+     <y>470</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_18">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>370</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_19">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>470</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_20">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>270</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="resources/resources.qrc">:/minus_1_day</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>1200</x>
+     <y>90</y>
+     <width>21</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>？</string>
+   </property>
+  </widget>
+  <zorder>label</zorder>
+  <zorder>daysLeft</zorder>
+  <zorder>peak_button</zorder>
+  <zorder>wilds_button</zorder>
+  <zorder>marshes_button</zorder>
+  <zorder>canyon_button</zorder>
+  <zorder>city_button</zorder>
+  <zorder>maw_button</zorder>
+  <zorder>label_2</zorder>
+  <zorder>peak_bar</zorder>
+  <zorder>peak_bar_2</zorder>
+  <zorder>peak_bar_3</zorder>
+  <zorder>peak_bar_4</zorder>
+  <zorder>peak_bar_5</zorder>
+  <zorder>peak_bar_6</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_4</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>label_7</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_9</zorder>
+  <zorder>label_10</zorder>
+  <zorder>label_11</zorder>
+  <zorder>label_12</zorder>
+  <zorder>label_13</zorder>
+  <zorder>label_14</zorder>
+  <zorder>label_15</zorder>
+  <zorder>label_16</zorder>
+  <zorder>label_17</zorder>
+  <zorder>label_18</zorder>
+  <zorder>label_19</zorder>
+  <zorder>label_20</zorder>
+  <zorder>pushButton</zorder>
+ </widget>
+ <resources>
+  <include location="resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
