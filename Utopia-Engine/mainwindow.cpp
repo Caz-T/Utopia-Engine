@@ -47,7 +47,7 @@ void MainWindow::dim_bg()
 
 void MainWindow::change_pic()
 {
-    ui->background->setPixmap(QPixmap(":/MainwindowBackground.jpg"));
+    ui->background->setPixmap(QPixmap("://MainwindowBackground.jpg"));
     ui->startButton->show();
     ui->loadButton->show();
     ui->quitButton->show();

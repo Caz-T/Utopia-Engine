@@ -6,6 +6,8 @@ exploration_panel::exploration_panel(QWidget *parent) :
     ui(new Ui::exploration_panel)
 {
     ui->setupUi(this);
+
+    this->hide();
 }
 
 exploration_panel::~exploration_panel()

@@ -3,6 +3,9 @@
         <file>StarryParadoxBackgroundPic.jpg</file>
         <file>MainwindowBackground.jpg</file>
         <file alias="minus_1_day">icons8-minus-1-day-100.png</file>
+        <file alias="skull">icons8-skull-50.png</file>
+        <file alias="empty_heart">icons8-heart-48 (1).png</file>
+        <file alias="full_heart">icons8-heart-48.png</file>
     </qresource>
     <qresource prefix="/dice">
         <file alias="3">dice/icons8-3-c-96.png</file>
@@ -33,5 +36,13 @@
         <file>event/icons8-four-leaf-clover-96.png</file>
         <file>event/icons8-monster-64.png</file>
         <file>event/icons8-storm-80.png</file>
+    </qresource>
+    <qresource prefix="/resource">
+        <file alias="quartz">resource/icons8-quartz-60.png</file>
+        <file alias="gum">resource/icons8-honey-64.png</file>
+        <file alias="silica">resource/icons8-silicon-50.png</file>
+        <file alias="wax">resource/icons8-beeswax-50.png</file>
+        <file alias="lead">resource/icons8-lead-64.png</file>
+        <file alias="silver">resource/icons8-silver-bars-48.png</file>
     </qresource>
 </RCC>
