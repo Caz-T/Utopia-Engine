@@ -10,3 +10,8 @@ void panel::close_panel()
 {
     this->hide();
 }
+
+void panel::refresh_panel()
+{
+    this->show();
+}

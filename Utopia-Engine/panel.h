@@ -12,10 +12,10 @@ public:
 
 public slots:
     // we require all panels' refreshing and closing to be slots
-    virtual void refresh_panel() = 0; // This is to be triggered whenever the subclass is shown or refreshed.
+    virtual void refresh_panel(); // This is to be triggered whenever the subclass is shown or refreshed.
     virtual void close_panel(); // This is to be triggered whenever the subclass is to be hidden.
 
-private:
+protected:
     game_controller* game;
 
 signals:
