@@ -1,6 +1,7 @@
 #include "game_controller.h"
 #include "QtWidgets/qwidget.h"
 #include <QDebug>
+#include <QFile>
 
 game_controller::game_controller(QObject *parent)
     : QObject{parent}
@@ -39,4 +40,61 @@ void game_controller::change_hp(int count)
     {
         _hp = 6;
     }
+}
+
+bool game_controller::_save_game()
+{
+    // IMPLEMENT ask for savename
+    QFile tempsave("save.txt");
+    if (!tempsave.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
+    QTextStream saveout(&tempsave);
+
+    saveout << _hp << ' ' << _date << ' ' << _doomsday << ' ' << _god_hand << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _storage[i] << ' '; saveout << Qt::endl; // intended to keep them in the same line.
+    for (int i = 0; i <= 2; i++) saveout << (_tool_available[i] ? 1 : 0) << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _expl_progress[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _location_event[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _artifact_status[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << (_treasure_found[i] ? 1 : 0) << ' '; saveout << Qt::endl;
+    saveout << (_seal_of_balance_available ? 1 : 0) << (_the_ancient_record_available ? 1 : 0) << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _link_value[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _activation_energy[i] << ' '; saveout << Qt::endl;
+    saveout << _wastebasket_slots << Qt::endl;
+
+    tempsave.close();
+    return true;
+}
+
+bool game_controller::_load_game()
+{
+    //IMPLEMENT ask for load name
+    QFile tempload("save.txt");
+    if (!tempload.open(QIODevice::ReadOnly | QIODevice::Text)) return false;
+    QTextStream loadin(&tempload);
+    int num;
+
+    try
+    {
+        loadin >> _hp; if (_hp > 6 or _hp < 0) throw 1;
+        loadin >> _date >> _doomsday; if (_date >= _doomsday or _date < 0 or _doomsday > 22) throw 2;
+        loadin >> _god_hand; if (_god_hand < 0 or _god_hand > 6) throw 3;
+        for (int i = 0; i <= 5; i++) {loadin >> _storage[i]; if (_storage[i] < 0 or _storage[i] > 4) throw 4;}
+        for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_tool_available[i] = true; break; case 0:_tool_available[i] = false; break; default: throw 5;}}
+        for (int i = 0; i <= 5; i++) {loadin >> _expl_progress[i]; if (_expl_progress[i] < 0 or _expl_progress[i] > 6) throw 6;}
+        for (int i = 0; i <= 5; i++) {loadin >> _location_event[i]; if (_location_event[i] < 0 or _location_event[i] > 4) throw 7;}
+        for (int i = 0; i <= 5; i++) {loadin >> _artifact_status[i]; if (_artifact_status[i] < 0 or _artifact_status[i] > 2) throw 8;}
+        for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_treasure_found[i] = true; break; case 0:_treasure_found[i] = false; break; default: throw 9;}}
+        loadin >> num; switch(num){case 1:_seal_of_balance_available = true; break; case 0:_seal_of_balance_available = false; break; default: throw 10;}
+        loadin >> num; switch(num){case 1:_the_ancient_record_available = true; break; case 0:_the_ancient_record_available = false; break; default: throw 11;}
+        for (int i = 0; i <= 5; i++) {loadin >> _link_value[i]; if (_link_value[i] < -1 or _link_value[i] > 15) throw 12;}
+        for (int i = 0; i <= 5; i++) {loadin >> _activation_energy[i]; if (_activation_energy[i] < 0 or _activation_energy[i] > 4) throw 13;}
+        loadin >> _wastebasket_slots; if (_wastebasket_slots < 0 or _wastebasket_slots > 10) throw 14;
+    }
+    catch (...)
+    {
+        //IMPLEMENT error message
+        return false;
+    }
+    // IMPLEMENT success message
+    return true;
 }

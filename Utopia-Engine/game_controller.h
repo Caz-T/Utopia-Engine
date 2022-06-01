@@ -42,6 +42,11 @@ public:
     // some setters, each completing its own logic
     void change_hp(int count);
 
+public slots:
+    // Save & Load
+    bool _save_game(); // This saves all the data. True indicates a successful save. Data are stored in the same order as in declaration.
+    bool _load_game(); // reads in all data. True indicates a successful load. Booleans are saved in 0/1 format.
+
 
 
 
@@ -80,6 +85,13 @@ private:
     int _link_value[6] = {-1, -1, -1, -1, -1, -1}; // order is the same as components, -1 means not yet linked
     int _activation_energy[6] = {0}; // the energy in activation slots
     int _wastebasket_slots = 10; // remaining boxes in the wastebasket
+
+
+
+    // data part ended
+
+
+
 
 
 
