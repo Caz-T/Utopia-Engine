@@ -6,6 +6,7 @@
         <file alias="skull">icons8-skull-50.png</file>
         <file alias="empty_heart">icons8-heart-48 (1).png</file>
         <file alias="full_heart">icons8-heart-48.png</file>
+        <file alias="skull_crossed">icons8-skull-50-crossed.png</file>
     </qresource>
     <qresource prefix="/dice">
         <file alias="3">dice/icons8-3-c-96.png</file>
