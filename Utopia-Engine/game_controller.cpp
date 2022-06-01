@@ -13,6 +13,7 @@ int game_controller::hp() const {return _hp;}
 int game_controller::date() const {return _date;}
 int game_controller::doomsday() const {return _doomsday;}
 int game_controller::god_hand() const {return _god_hand;}
+int game_controller::position() const {return _position;}
 int game_controller::storage(int code) const {return _storage[code];}
 bool game_controller::tool_available(int code) const {return _tool_available[code];}
 int game_controller::expl_progress(int code) const {return _expl_progress[code];}
@@ -49,7 +50,7 @@ bool game_controller::save_game()
     if (!tempsave.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
     QTextStream saveout(&tempsave);
 
-    saveout << _hp << ' ' << _date << ' ' << _doomsday << ' ' << _god_hand << Qt::endl;
+    saveout << _hp << ' ' << _date << ' ' << _doomsday << ' ' << _god_hand << ' ' << _position << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _storage[i] << ' '; saveout << Qt::endl; // intended to keep them in the same line.
     for (int i = 0; i <= 2; i++) saveout << (_tool_available[i] ? 1 : 0) << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _expl_progress[i] << ' '; saveout << Qt::endl;
@@ -78,6 +79,7 @@ bool game_controller::load_game()
         loadin >> _hp; if (_hp > 6 or _hp < 0) throw 1;
         loadin >> _date >> _doomsday; if (_date >= _doomsday or _date < 0 or _doomsday > 22) throw 2;
         loadin >> _god_hand; if (_god_hand < 0 or _god_hand > 6) throw 3;
+        loadin >> _position; if (_position < 0 or _position > 2) throw 15;
         for (int i = 0; i <= 5; i++) {loadin >> _storage[i]; if (_storage[i] < 0 or _storage[i] > 4) throw 4;}
         for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_tool_available[i] = true; break; case 0:_tool_available[i] = false; break; default: throw 5;}}
         for (int i = 0; i <= 5; i++) {loadin >> _expl_progress[i]; if (_expl_progress[i] < 0 or _expl_progress[i] > 6) throw 6;}

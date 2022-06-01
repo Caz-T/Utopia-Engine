@@ -26,6 +26,7 @@ public:
     int date() const;
     int doomsday() const;
     int god_hand() const;
+    int position() const;
     int storage(int code) const;
     bool tool_available(int code) const;
     int expl_progress(int code) const;
@@ -67,6 +68,7 @@ private:
     int _hp = 6;
     int _date = 0, _doomsday = 15; // current date and doomsday count. When _date >= _doomsday, the game ends.
     int _god_hand = 0; // the remaining energy in god's hand
+    int _position = 0; // current position. 0: exploration, 1: worktable
 
     // backpack
     int _storage[6] = {0}; // quantity of things in backpack.
