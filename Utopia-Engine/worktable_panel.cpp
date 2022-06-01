@@ -19,4 +19,5 @@ worktable_panel::~worktable_panel()
 void worktable_panel::refresh_panel()
 {
 
+    panel::refresh_panel();
 }

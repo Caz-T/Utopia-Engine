@@ -15,5 +15,5 @@ backpack_panel::~backpack_panel()
 
 void backpack_panel::refresh_panel()
 {
-
+    panel::refresh_panel();
 }
