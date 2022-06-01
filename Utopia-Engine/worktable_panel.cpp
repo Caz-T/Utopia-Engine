@@ -1,8 +1,8 @@
 #include "worktable_panel.h"
 #include "ui_worktable_panel.h"
 
-worktable_panel::worktable_panel(QWidget *parent) :
-    panel(parent),
+worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
+    panel(gm, parent),
     ui(new Ui::worktable_panel)
 {
     ui->setupUi(this);

@@ -1,12 +1,12 @@
 #include "panel.h"
 
-panel::panel(QWidget *parent)
-    : QWidget{parent}
+panel::panel(game_controller* gm, QWidget *parent)
+    : QWidget{parent}, game(gm)
 {
 
 }
 
 void panel::close_panel()
 {
-    this->close();
+    this->hide();
 }

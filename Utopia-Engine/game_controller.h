@@ -2,7 +2,6 @@
 #define GAME_CONTROLLER_H
 
 #include <QObject>
-#include "panel.h"
 
 class game_controller : public QObject
 {
@@ -44,8 +43,8 @@ public:
 
 public slots:
     // Save & Load
-    bool _save_game(); // This saves all the data. True indicates a successful save. Data are stored in the same order as in declaration.
-    bool _load_game(); // reads in all data. True indicates a successful load. Booleans are saved in 0/1 format.
+    bool save_game(); // This saves all the data. True indicates a successful save. Data are stored in the same order as in declaration.
+    bool load_game(); // reads in all data. True indicates a successful load. Booleans are saved in 0/1 format.
 
 
 

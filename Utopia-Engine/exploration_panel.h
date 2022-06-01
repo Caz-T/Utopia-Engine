@@ -13,7 +13,7 @@ class exploration_panel : public panel
     Q_OBJECT
 
 public:
-    explicit exploration_panel(QWidget *parent = nullptr);
+    explicit exploration_panel(game_controller* gm, QWidget *parent = nullptr);
     ~exploration_panel();
 
 public slots:
@@ -21,6 +21,7 @@ public slots:
 
 private:
     Ui::exploration_panel *ui;
+
 };
 
 #endif // EXPLORATION_PANEL_H

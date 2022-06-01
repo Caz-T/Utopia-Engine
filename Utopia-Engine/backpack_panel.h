@@ -13,7 +13,7 @@ class backpack_panel : public panel
     Q_OBJECT
 
 public:
-    explicit backpack_panel(QWidget *parent = nullptr);
+    explicit backpack_panel(game_controller* gm, QWidget *parent = nullptr);
     ~backpack_panel();
 
 public slots:

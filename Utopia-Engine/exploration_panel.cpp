@@ -1,8 +1,9 @@
 #include "exploration_panel.h"
 #include "ui_exploration_panel.h"
+#include <QDebug>
 
-exploration_panel::exploration_panel(QWidget *parent) :
-    panel(parent),
+exploration_panel::exploration_panel(game_controller* gm, QWidget *parent) :
+    panel(gm, parent),
     ui(new Ui::exploration_panel)
 {
     ui->setupUi(this);
@@ -17,5 +18,5 @@ exploration_panel::~exploration_panel()
 
 void exploration_panel::refresh_panel()
 {
-
+    this->show();
 }

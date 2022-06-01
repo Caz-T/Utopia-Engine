@@ -37,8 +37,10 @@ private:
     // a public timer
     QTimer* timer;
 
-    // the setup process
-    void beginning();
+
+    void beginning(); // the setup process
+    void hide_main_window(); // hides all components in main window, but leaves the window itself open
+    void return_to_menu(); // shows all components and destroys all others
 
     void switch_panel(int panel_code, panel* sender = nullptr);
     /* allows child panels to switch to other panels. Sender is the panel to be hidden.
@@ -49,8 +51,12 @@ private:
      * 3: backpack & help
      */
 
+
 private slots:
     void dim_bg();
     void change_pic();
+
+    void on_startButton_clicked();
+    void on_loadButton_clicked();
 };
 #endif // MAINWINDOW_H

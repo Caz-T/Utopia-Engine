@@ -42,7 +42,7 @@ void game_controller::change_hp(int count)
     }
 }
 
-bool game_controller::_save_game()
+bool game_controller::save_game()
 {
     // IMPLEMENT ask for savename
     QFile tempsave("save.txt");
@@ -65,7 +65,7 @@ bool game_controller::_save_game()
     return true;
 }
 
-bool game_controller::_load_game()
+bool game_controller::load_game()
 {
     //IMPLEMENT ask for load name
     QFile tempload("save.txt");
