@@ -21,6 +21,29 @@ public:
     constexpr static const int player_attack[5] = {5, 6, 6, 6, 6};
 
 
+    // getters
+    // each XXX() returns the value of _XXX
+    int hp() const;
+    int date() const;
+    int doomsday() const;
+    int god_hand() const;
+    int storage(int code) const;
+    bool tool_available(int code) const;
+    int expl_progress(int code) const;
+    int location_event(int code) const;
+    int artifact_status(int code) const;
+    bool treasure_found(int code) const;
+    bool seal_of_balance_available() const;
+    bool the_ancient_record_abailable() const;
+    int link_value(int code) const;
+    int activation_energy(int code) const;
+    int wastebasket_slots() const;
+
+    // some setters, each completing its own logic
+    void change_hp(int count);
+
+
+
 
 private:
 
@@ -37,7 +60,7 @@ private:
 
 
     // global
-    int _hitpoint = 6;
+    int _hp = 6;
     int _date = 0, _doomsday = 15; // current date and doomsday count. When _date >= _doomsday, the game ends.
     int _god_hand = 0; // the remaining energy in god's hand
 
@@ -51,12 +74,11 @@ private:
     int _artifact_status[6] = {0}; // 0: not found, 1: found, 2: activated
     bool _treasure_found[6] = {false}; // whether treasures are found
     bool _seal_of_balance_available = false; // remember to set this to true when acquiring seal of balance.
-    bool _the_ancient_record_availabel = false; // same as above
+    bool _the_ancient_record_available = false; // same as above
 
     // worktable
-    bool _linked[6] = {false}; // order is the same as components
-    int _link_value = {0}; // same as above
-    int _activation_energy = {0}; // the energy in activation slots
+    int _link_value[6] = {-1, -1, -1, -1, -1, -1}; // order is the same as components, -1 means not yet linked
+    int _activation_energy[6] = {0}; // the energy in activation slots
     int _wastebasket_slots = 10; // remaining boxes in the wastebasket
 
 
