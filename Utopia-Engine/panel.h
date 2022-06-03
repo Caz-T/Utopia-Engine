@@ -2,6 +2,10 @@
 #define PANEL_H
 
 #include <QWidget>
+#include <QProgressBar>
+#include <QLabel>
+#include <QPushButton>
+#include <QMessageBox>
 #include "game_controller.h"
 
 class panel : public QWidget

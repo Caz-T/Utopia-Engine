@@ -103,3 +103,50 @@ bool game_controller::load_game()
 void game_controller::use_tool(int tool_id, bool flag) {_tool_available[tool_id] = flag;}
 void game_controller::use_seal_of_balance() {_seal_of_balance_available = false;}
 void game_controller::use_the_ancient_record() {_the_ancient_record_available = false;}
+void game_controller::day_progress()
+{
+    _date++;
+    if (_date >= _doomsday)
+    {
+        //IMPLEMENT DOOMSDAY
+    }
+}
+void game_controller::charge_god_hand(int increment)
+{
+    _god_hand += increment;
+    if (_god_hand > 6) _god_hand = 6;
+    while (_god_hand >= 3 and _doomsday < 22)
+    {
+        _god_hand -= 3;
+        _doomsday ++;
+    }
+}
+void game_controller::find_component(int id) {if (_storage[id] < 4) _storage[id] ++;}
+void game_controller::find_artifact(int id)
+{
+    if (_artifact_status[id] != 0) qDebug() << "artifact status exception! artifact code: " << id << " status: " << _artifact_status[id];
+    else _artifact_status[id] = 1;
+}
+void game_controller::activate_artifact(int id)
+{
+    if (_artifact_status[id] != 1) qDebug() << "artifact status exception! artifact code: " << id << " status: " << _artifact_status[id];
+    else _artifact_status[id] = 2;
+}
+void game_controller::proceed_exploration(int id)
+{
+    const int day_prog_checkpoint[6][4] =
+    {
+        {0, 1, 3, -1},
+        {0, 3, -1, -1},
+        {0, 2, 4, -1},
+        {0, 1, 3, -1},
+        {0, 2, 4, -1},
+        {0, 1, 2, 4}
+    };
+    for (int i = 0; i < 4; i++)
+        if (_expl_progress[id] == day_prog_checkpoint[id][i])
+            day_progress();
+    if (_expl_progress[id] < 5) _expl_progress[id]++;
+    else _expl_progress[id] = 0;
+}
+

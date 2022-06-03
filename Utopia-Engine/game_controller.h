@@ -41,6 +41,21 @@ public:
 
     // some setters, each completing its own logic
     void change_hp(int count);
+    void charge_god_hand(int increment);
+    void reroll_events();
+
+    // exploration-related
+    void find_component(int id);
+    void find_artifact(int id);
+    void find_treasure(int id);
+    void proceed_exploration(int id);
+    void clean_exploration_progress();
+
+    // worktable-related
+    void activate_artifact(int id);
+    void add_link_value(int id, int increment);
+    void dump_dice();
+
 
     // usage of one-time stuff. for tools, setting flag to true means recharging it.
     void use_tool(int tool_id, bool flag = false);
@@ -96,7 +111,8 @@ private:
 
     // data part ended
 
-
+    // private setters:
+    void day_progress();
 
 
 

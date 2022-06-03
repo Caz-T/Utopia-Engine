@@ -18,7 +18,7 @@ exploration_dialog::exploration_dialog(game_controller* gm, int id, QWidget *par
     blanks[3] = ui->label_4;
     blanks[4] = ui->label_5;
     blanks[5] = ui->label_6;
-    buttons[0] = ui->pushButton;
+    buttons[0] = ui->pushButton_1;
     buttons[1] = ui->pushButton_2;
     buttons[2] = ui->pushButton_3;
     buttons[3] = ui->pushButton_4;
@@ -50,24 +50,37 @@ void exploration_dialog::on_roll_button_clicked()
     dice::show_dice_result(ui->die_result_2, result_2);
     roll_times ++;
     for (int i = 0 ; i < 6; i++)
-        if (numbers[i] != 0)
+        if (numbers[i] == 0)
             buttons[i]->setVisible(true);
 }
 
 void exploration_dialog::button_candy(int i)
 {
-    numbers[i] = result_1 == 0 ? result_2 : result_1;
-    if (result_1 == 0) result_2 = 0;
-    else result_1 = 0;
-    ui->pushButton->hide();
+    if (result_1 == 0)
+    {
+        numbers[i] = result_2;
+        result_2 = 0;
+        ui->die_result_2->hide();
+    }
+    else
+    {
+        numbers[i] = result_1;
+        result_1 = 0;
+        ui->die_result_1->hide();
+    }
+    buttons[i]->hide();
     dice::show_dice_result(blanks[i], numbers[i]);
     bool flag = true;
     for (auto p : numbers) if (p == 0) flag = false;
     if (flag)
     {
         int expl_result = 100 * (numbers[0] - numbers[3]) + 10 * (numbers[1] - numbers[4]) + (numbers[2] - numbers[5]);
-        if (expl_result <= 0) done(expl_result);
-        if (game->tool_available(1))
+        if (expl_result <= 0)
+        {
+            done(expl_result);
+            return;
+        }
+        if (game->tool_available(1) and expl_result <= 99)
         {
             QMessageBox* msg = new QMessageBox(this);
             msg->setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
@@ -78,6 +91,7 @@ void exploration_dialog::button_candy(int i)
             {
                 game->use_tool(1);
                 done(1);
+                return;
             }
         }
         if (game->location_event(location_id) == 3)
@@ -94,8 +108,8 @@ void exploration_dialog::button_candy(int i)
                 expl_result -= 10;
                 if (expl_result <= 0)
                 {
-                    expl_result = 0;
                     done(0);
+                    return;
                 }
             }
         }
@@ -113,8 +127,8 @@ void exploration_dialog::button_candy(int i)
                 expl_result -= 10;
                 if (expl_result <= 0)
                 {
-                    expl_result = 0;
                     done(0);
+                    return;
                 }
             }
         }
@@ -132,22 +146,26 @@ void exploration_dialog::button_candy(int i)
                 expl_result -= 10;
                 if (expl_result <= 0)
                 {
-                    expl_result = 0;
                     done(0);
+                    return;
                 }
             }
         }
         done(expl_result);
+        return;
     }
     else
     {
-        ui->roll_button->show();
-        ui->die_result_1->hide();
-        ui->die_result_2->hide();
+        if (result_1 == 0 and result_2 == 0)
+        {
+            ui->roll_button->show();
+            ui->die_result_1->hide();
+            ui->die_result_2->hide();
+        }
     }
 }
 
-void exploration_dialog::on_pushButton_clicked() {button_candy(0);}
+void exploration_dialog::on_pushButton_1_clicked() {button_candy(0);}
 void exploration_dialog::on_pushButton_2_clicked() {button_candy(1);}
 void exploration_dialog::on_pushButton_3_clicked() {button_candy(2);}
 void exploration_dialog::on_pushButton_4_clicked() {button_candy(3);}

@@ -45,3 +45,67 @@ void exploration_panel::refresh_panel()
 
     panel::refresh_panel();
 }
+
+void exploration_panel::explore(int id)
+{
+    game->proceed_exploration(id);
+    exploration_dialog* dlg = new exploration_dialog(game, id, this);
+    dlg->exec();
+    int r = dlg->result();
+    if (r == 0) // perfect search
+    {
+        game->find_artifact(id);
+        game->activate_artifact(id);
+        game->charge_god_hand(5);
+        QMessageBox msg;
+        msg.setText("完美的探索！你找到了已经激活的神器，外加五点神之手能量！");
+        msg.exec();
+    }
+    else if (r >= 1 and r <= 10)
+    {
+        game->find_artifact(id);
+        QMessageBox msg;
+        msg.setText("很棒的探索！你找到了此区域的神器！");
+        msg.exec();
+    }
+    else if (r >= 11 and r <= 99)
+    {
+        game->find_component(id);
+        QMessageBox msg;
+        msg.setText("不错的探索！你找到了此区域的资源组件。");
+        msg.exec();
+    }
+    else
+    {
+        QMessageBox msg;
+        QString msg_text = "是遭遇战！\n";
+        // IMPLEMENT battle hint
+        if (r < 0) r = -r + 99;
+        if (r > 555) r = 555;
+        int encounter_level = r / 100;
+        msg.setText(msg_text);
+        msg.exec();
+        bool into_fight = true;
+        if (game->treasure_found(2))
+        {
+            QMessageBox shimmer_judge;
+            shimmer_judge.setText("是遭遇战！\n你的烁影月链熠熠发光，似乎可以用它逃脱怪物的追猎。\n你是否要避免这场遭遇战？");
+            shimmer_judge.exec();
+            shimmer_judge.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+            into_fight = shimmer_judge.result() == QMessageBox::Cancel;
+        }
+        if (into_fight)
+        {
+            battle_dialog battle(game, id, encounter_level, this);
+            // IMPLEMENT battle
+        }
+    }
+    refresh_panel();
+    delete dlg;
+}
+void exploration_panel::on_peak_button_clicked() {explore(0);}
+void exploration_panel::on_wilds_button_clicked() {explore(1);}
+void exploration_panel::on_marshes_button_clicked() {explore(2);}
+void exploration_panel::on_canyon_button_clicked() {explore(3);}
+void exploration_panel::on_city_button_clicked() {explore(4);}
+void exploration_panel::on_maw_button_clicked() {explore(5);}

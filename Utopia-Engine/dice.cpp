@@ -13,7 +13,8 @@ int dice::roll(int sides)
 void dice::show_dice_result(QLabel* lbl, int result)
 {
     QString path = ":/dice/";
-    path.append(QChar(result + '0'));
+    path.append(QString::number(result));
+    lbl->setScaledContents(true);
     lbl->setPixmap(QPixmap(path));
     lbl->show();
 }
