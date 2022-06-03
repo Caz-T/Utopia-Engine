@@ -1,6 +1,8 @@
 #ifndef CONNECTION_DIALOG_H
 #define CONNECTION_DIALOG_H
 
+#include <QLabel>
+#include <QPushButton>
 #include <QDialog>
 
 namespace Ui {
@@ -17,6 +19,9 @@ public:
 
 private:
     Ui::connection_dialog *ui;
+
+
+
 };
 
 #endif // CONNECTION_DIALOG_H
