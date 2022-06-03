@@ -65,7 +65,6 @@ bool game_controller::save_game()
     tempsave.close();
     return true;
 }
-
 bool game_controller::load_game()
 {
     //IMPLEMENT ask for load name
@@ -100,3 +99,7 @@ bool game_controller::load_game()
     // IMPLEMENT success message
     return true;
 }
+
+void game_controller::use_tool(int tool_id, bool flag) {_tool_available[tool_id] = flag;}
+void game_controller::use_seal_of_balance() {_seal_of_balance_available = false;}
+void game_controller::use_the_ancient_record() {_the_ancient_record_available = false;}

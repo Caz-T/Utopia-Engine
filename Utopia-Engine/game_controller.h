@@ -42,6 +42,11 @@ public:
     // some setters, each completing its own logic
     void change_hp(int count);
 
+    // usage of one-time stuff. for tools, setting flag to true means recharging it.
+    void use_tool(int tool_id, bool flag = false);
+    void use_seal_of_balance();
+    void use_the_ancient_record();
+
 public slots:
     // Save & Load
     bool save_game(); // This saves all the data. True indicates a successful save. Data are stored in the same order as in declaration.
@@ -72,11 +77,11 @@ private:
 
     // backpack
     int _storage[6] = {0}; // quantity of things in backpack.
-    bool _tool_available[3] = {true, true, true}; // true means the tool can be used.
+    bool _tool_available[3] = {true, true, true}; // true means the tool can be used. 0: focus charm, 1: dowsing rod, 2: paralysis wand
 
     // exploration
     int _expl_progress[6] = {0}; // progress of exploration.
-    int _location_event[6] = {0}; // event at each location.
+    int _location_event[6] = {0}; // event at each location. 0: null, 1: active monster, 2: fleeting vision, 3: good fortune, 4: foul weather
     int _artifact_status[6] = {0}; // 0: not found, 1: found, 2: activated
     bool _treasure_found[6] = {false}; // whether treasures are found
     bool _seal_of_balance_available = false; // remember to set this to true when acquiring seal of balance.
