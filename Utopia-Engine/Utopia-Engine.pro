@@ -27,6 +27,7 @@ HEADERS += \
     backpack_panel.h \
     battle_dialog.h \
     connection_dialog.h \
+    constants.h \
     dice.h \
     exploration_dialog.h \
     exploration_panel.h \

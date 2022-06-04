@@ -2,6 +2,7 @@
 #define GAME_CONTROLLER_H
 
 #include <QObject>
+#include "constants.h"
 
 class game_controller : public QObject
 {
@@ -42,7 +43,7 @@ public:
     // some setters, each completing its own logic
     void change_hp(int count);
     void charge_god_hand(int increment);
-    void reroll_events();
+
 
     // exploration-related
     void find_component(int id);
@@ -113,6 +114,7 @@ private:
 
     // private setters:
     void day_progress();
+    void reroll_events();
 
 
 

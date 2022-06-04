@@ -2,6 +2,8 @@
 #include "QtWidgets/qwidget.h"
 #include <QDebug>
 #include <QFile>
+#include <QMessageBox>
+#include "dice.h"
 
 game_controller::game_controller(QObject *parent)
     : QObject{parent}
@@ -110,6 +112,7 @@ void game_controller::day_progress()
     {
         //IMPLEMENT DOOMSDAY
     }
+    if (_date % 3 == 2) reroll_events();
 }
 void game_controller::charge_god_hand(int increment)
 {
@@ -149,4 +152,20 @@ void game_controller::proceed_exploration(int id)
     if (_expl_progress[id] < 5) _expl_progress[id]++;
     else _expl_progress[id] = 0;
 }
-
+void game_controller::reroll_events()
+{
+    dice* d6= new dice;
+    QString message = "事件重置了！新的事件为：\n";
+    for (int i = 0; i < 4; i++)
+    {
+        int ret = d6->roll();
+        _location_event[ret] = i;
+        message += event_names_zh[i];
+        message += "：";
+        message += location_names_zh[ret];
+        message += "\n";
+    }
+    QMessageBox msg;
+    msg.setText(message);
+    msg.exec();
+}
