@@ -30,6 +30,7 @@ public:
     bool the_ancient_record_abailable() const;
     int link_value(int code) const;
     int activation_energy(int code) const;
+    int activation_attempt(int id) const;
     int wastebasket_slots() const;
 
 
@@ -100,6 +101,7 @@ private:
     // worktable
     int _link_value[6] = {-1, -1, -1, -1, -1, -1}; // order is the same as components, -1 means not yet linked
     int _activation_energy[6] = {0}; // the energy in activation slots
+    int _activation_attempt[6] = {0}; // attempts to activate the artifact
     int _wastebasket_slots = 10; // remaining boxes in the wastebasket
 
 

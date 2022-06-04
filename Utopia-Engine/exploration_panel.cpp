@@ -32,9 +32,11 @@ void exploration_panel::refresh_panel()
     for (; i <= 22; i++) skulls[i - 15]->setPixmap(QPixmap(":/skull"));
     ui->days_left->display((int) game->doomsday() - game->date());
 
-    // show artifacts and stuff
+    // show storage
     QLCDNumber* components[6] = {ui->compo_count_1, ui->compo_count_2, ui->compo_count_3, ui->compo_count_4, ui->compo_count_5, ui->compo_count_6 };
     for (i = 0; i < 6; i++) components[i]->display(game->storage(i));
+
+    // show artifacts and treasures
     QLabel* treasure_labels[6] = {ui->peak_treasure, ui->wilds_treasure, ui->marshes_treasure, ui->canyon_treasure, ui->city_treasure, ui->maw_treasure};
     for (i = 0; i < 6; i++)
     {
@@ -204,6 +206,19 @@ void exploration_panel::on_use_seal_clicked()
             refresh_panel();
             return;
         }
+    }
+}
+
+
+void exploration_panel::on_pushButton_clicked()
+{
+    QMessageBox msg;
+    msg.setText("是否确定离开探索区域？\n目前的探索进度将被清空。");
+    msg.setStandardButtons(QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel);
+    if (msg.exec() == QMessageBox::StandardButton::Ok)
+    {
+        for (int i = 0; i < 6; i++) game->clean_exploration_progress();
+        emit switch_panel_signal(2, this);
     }
 }
 

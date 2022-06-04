@@ -26,6 +26,7 @@ bool game_controller::seal_of_balance_available() const {return _seal_of_balance
 bool game_controller::the_ancient_record_abailable() const {return _the_ancient_record_available;}
 int game_controller::link_value(int code) const {return _link_value[code];}
 int game_controller::activation_energy(int code) const {return _activation_energy[code];}
+int game_controller::activation_attempt(int code) const {return _activation_attempt[code];}
 int game_controller::wastebasket_slots() const {return _wastebasket_slots;}
 
 bool game_controller::change_hp(int count)
@@ -65,6 +66,7 @@ bool game_controller::save_game()
     saveout << (_seal_of_balance_available ? 1 : 0) << (_the_ancient_record_available ? 1 : 0) << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _link_value[i] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _activation_energy[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) saveout << _activation_attempt[i] << ' '; saveout << Qt::endl;
     saveout << _wastebasket_slots << Qt::endl;
 
     tempsave.close();
@@ -94,6 +96,7 @@ bool game_controller::load_game()
         loadin >> num; switch(num){case 1:_the_ancient_record_available = true; break; case 0:_the_ancient_record_available = false; break; default: throw 11;}
         for (int i = 0; i <= 5; i++) {loadin >> _link_value[i]; if (_link_value[i] < -1 or _link_value[i] > 15) throw 12;}
         for (int i = 0; i <= 5; i++) {loadin >> _activation_energy[i]; if (_activation_energy[i] < 0 or _activation_energy[i] > 4) throw 13;}
+        for (int i = 0; i <= 5; i++) {loadin >> _activation_attempt[i]; if (_activation_attempt[i] < 0 or _activation_energy[i] > 2) throw 16;}
         loadin >> _wastebasket_slots; if (_wastebasket_slots < 0 or _wastebasket_slots > 10) throw 14;
     }
     catch (...)
@@ -187,4 +190,19 @@ void game_controller::find_treasure(int id)
 {
     _treasure_found[id] = true;
     if (id == 4) _the_ancient_record_available = true;
+}
+void game_controller::add_link_value(int id, int increment)
+{
+    if (_activation_attempt[id] >= 2) return;
+    _activation_attempt[id] ++;
+    _activation_energy[id] += increment;
+    if (_activation_energy[id] > 4)
+    {
+        charge_god_hand(_activation_energy[id] - 4);
+        _activation_energy[id] = 4;
+    }
+}
+void game_controller::clean_exploration_progress()
+{
+    for (int i = 0; i < 6; i++) _expl_progress[i] = 0;
 }

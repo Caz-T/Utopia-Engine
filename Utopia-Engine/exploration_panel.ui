@@ -1434,7 +1434,7 @@
     </font>
    </property>
    <property name="text">
-    <string>返回工作室</string>
+    <string>返回工作台</string>
    </property>
   </widget>
   <widget class="QPushButton" name="use_seal">
