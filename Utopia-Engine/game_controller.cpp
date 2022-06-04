@@ -28,21 +28,24 @@ int game_controller::link_value(int code) const {return _link_value[code];}
 int game_controller::activation_energy(int code) const {return _activation_energy[code];}
 int game_controller::wastebasket_slots() const {return _wastebasket_slots;}
 
-void game_controller::change_hp(int count)
+bool game_controller::change_hp(int count)
 {
     _hp += count;
     if (_hp < 0)
     {
         // IMPLEMENT death ending
+        return true;
     }
     else if (_hp == 0)
     {
         // IMPLEMENT unconsciousness
+        return true;
     }
     else if (_hp > 6)
     {
         _hp = 6;
     }
+    return false;
 }
 
 bool game_controller::save_game()

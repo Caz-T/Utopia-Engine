@@ -26,9 +26,22 @@ const QString monster_names_zh[6][5] = { // remember here the order is 1 less th
     {"盗墓者", "魂灯", "复仇阴魂", "噩梦蟹", "不可名"},
     {"小恶魔", "反抗术士", "巨炎蜥", "火花元素", "火山之魂"}
 };
-const QString event_names_zh[4] = {
-    "活跃怪物", "幻梦预视", "好运气", "恶劣天气"
+const bool is_spirit_monster[6][5] = {
+    {false, false, false, false, true},
+    {false, false, false, false, false},
+    {false, false, false, true, false},
+    {false, false, true, false, true},
+    {false, true, true, false, false},
+    {false, false, false, true, true}
 };
+
+// combat: the following stores the upper limits for monsters' attacks, and the lower limits for players' attacks.
+// note that all further alternations are done in-place by exploration_dialog.
+const int monster_attack[5] = {1, 1, 2, 3, 4};
+const int player_attack[5] = {5, 6, 6, 6, 6};
+const QString event_names_zh[5] = {
+    "", "活跃怪物", "幻梦预视", "好运气", "恶劣天气"
+};//^^ notice this empty string!!
 /*
 const QString mdsah[6] = {
         "", "", "", "", "", ""

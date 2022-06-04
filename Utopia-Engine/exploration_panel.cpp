@@ -109,6 +109,11 @@ void exploration_panel::explore(int id)
         if (r < 0) r = -r + 99;
         if (r > 555) r = 555;
         int encounter_level = r / 100;
+        if (game->location_event(id) == 1)
+        {
+            encounter_level += 2;
+            if (encounter_level > 5) encounter_level = 5;
+        }
         msg.setText(msg_text);
         msg.exec();
         bool into_fight = true;
@@ -123,7 +128,7 @@ void exploration_panel::explore(int id)
         if (into_fight)
         {
             battle_dialog battle(game, id, encounter_level, this);
-            // IMPLEMENT battle
+            battle.exec();
         }
     }
     refresh_panel();

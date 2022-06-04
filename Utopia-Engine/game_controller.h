@@ -13,14 +13,6 @@ public:
 
 
 public:
-    // constants
-
-    // combat: the following stores the upper limits for monsters' attacks, and the lower limits for players' attacks.
-    // note that these all have the const modifier, so further alternations are done in-place by exploration_dialog.
-    constexpr static const int monster_attack[5] = {1, 1, 2, 3, 4};
-    constexpr static const int player_attack[5] = {5, 6, 6, 6, 6};
-
-
     // getters
     // each XXX() returns the value of _XXX
     int hp() const;
@@ -41,7 +33,7 @@ public:
     int wastebasket_slots() const;
 
     // some setters, each completing its own logic
-    void change_hp(int count);
+    bool change_hp(int count); // default = false. True means character unconscious. if character dies, this function just kills the game
     void charge_god_hand(int increment);
 
 
