@@ -23,7 +23,7 @@ protected:
     game_controller* game;
 
 signals:
-
+    void switch_panel_signal(int target, panel* sender);
 };
 
 #endif // PANEL_H

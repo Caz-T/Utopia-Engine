@@ -19,6 +19,9 @@ public:
 public slots:
     void refresh_panel();
 
+private slots:
+    void on_leave_worktable_clicked();
+
 private:
     Ui::worktable_panel *ui;
 };

@@ -15,3 +15,4 @@ void panel::refresh_panel()
 {
     this->show();
 }
+
