@@ -61,9 +61,6 @@ void MainWindow::switch_panel(int panel_code, panel* sender)
     case 2:
         worktable->refresh_panel();
         break;
-    case 3:
-        backpack->refresh_panel();
-        break;
     }
 }
 
@@ -72,11 +69,11 @@ void MainWindow::on_startButton_clicked()
     game = new game_controller(this);
     worktable = new worktable_panel(game, this);
     exploration = new exploration_panel(game, this);
-    backpack = new backpack_panel(game, this);
+    connect(worktable, SIGNAL(switch_panel_signal(int,panel*)), this, SLOT(switch_panel(int,panel*)));
+    connect(exploration, SIGNAL(switch_panel_signal(int,panel*)), this, SLOT(switch_panel(int,panel*)));
 
     worktable->close_panel();
     exploration->close_panel();
-    backpack->close_panel();
 
     hide_main_window();
     switch_panel(1);
@@ -94,11 +91,9 @@ void MainWindow::on_loadButton_clicked()
     }
     worktable = new worktable_panel(game, this);
     exploration = new exploration_panel(game, this);
-    backpack = new backpack_panel(game, this);
 
     worktable->close_panel();
     exploration->close_panel();
-    backpack->close_panel();
 
     hide_main_window();
     switch_panel(1);
@@ -116,6 +111,5 @@ void MainWindow::return_to_menu()
     delete game;
     delete exploration;
     delete worktable;
-    delete backpack;
     ui->setupUi(this);
 }
