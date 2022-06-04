@@ -35,13 +35,39 @@ void exploration_panel::refresh_panel()
     // show artifacts and stuff
     QLCDNumber* components[6] = {ui->compo_count_1, ui->compo_count_2, ui->compo_count_3, ui->compo_count_4, ui->compo_count_5, ui->compo_count_6 };
     for (i = 0; i < 6; i++) components[i]->display(game->storage(i));
-    // IMPLEMENT artifacts and treasures
+    QLabel* treasure_labels[6] = {ui->peak_treasure, ui->wilds_treasure, ui->marshes_treasure, ui->canyon_treasure, ui->city_treasure, ui->maw_treasure};
+    for (i = 0; i < 6; i++)
+    {
+        treasure_labels[i]->setText(treasure_names_zh[i]);
+        treasure_labels[i]->setStyleSheet(QString("QLabel {color: " + QString(game->treasure_found(i) ? "black}" : "grey}")));
+    }
+    QLabel* arti_labels[6] = {ui->peak_artifact, ui->wilds_artifact, ui->marshes_artifact, ui->canyon_artifact, ui->city_artifact, ui->maw_artifact};
+    for (i = 0; i < 6; i++)
+    {
+        arti_labels[i]->setText(artifact_names_zh[i]);
+        QString temp_stylesheet = "QLabel {color: ";
+        switch(game->artifact_status(i))
+        {
+        case 0:
+            temp_stylesheet += "grey";
+            break;
+        case 1:
+            temp_stylesheet += "black";
+            break;
+        case 2:
+            temp_stylesheet += "green";
+            break;
+        default:
+            qDebug() << "artifact status wrong!";
+            temp_stylesheet += "white";
+        }
+        temp_stylesheet += "}";
+        arti_labels[i]->setStyleSheet(temp_stylesheet);
+    }
 
     // show exploration status
     QProgressBar* prog[6] = {ui->peak_bar, ui->peak_bar_2, ui->peak_bar_3, ui->peak_bar_4, ui->peak_bar_5, ui->peak_bar_6};
     for (i = 0; i < 6; i++) prog[i]->setValue(game->expl_progress(i));
-
-
 
     panel::refresh_panel();
 }
@@ -50,8 +76,8 @@ void exploration_panel::explore(int id)
 {
     game->proceed_exploration(id);
     exploration_dialog* dlg = new exploration_dialog(game, id, this);
-    dlg->exec();
-    int r = dlg->result();
+    int r = dlg->exec();;
+    qDebug() << "result=" << r;
     if (r == 0) // perfect search
     {
         game->find_artifact(id);

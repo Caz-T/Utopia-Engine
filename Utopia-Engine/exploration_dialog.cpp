@@ -10,6 +10,7 @@ exploration_dialog::exploration_dialog(game_controller* gm, int id, QWidget *par
     d6(new dice),
     location_id(id)
 {
+    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
     ui->setupUi(this);
 
     blanks[0] = ui->label;
@@ -27,6 +28,7 @@ exploration_dialog::exploration_dialog(game_controller* gm, int id, QWidget *par
 
     for (auto& button : buttons) button->setVisible(false);
 
+    setWindowTitle(QString("探索：") + location_names_zh[id]);
     QString envi_text = "当前环境效果：\n";
     if (game->location_event(location_id) == 3) envi_text.append("好运气——搜索结果-10\n");
     if (game->artifact_status(1) == 2 and (location_id == 0 or location_id == 5)) envi_text.append("隐士之镜——此处搜索结果-10\n");
@@ -86,8 +88,7 @@ void exploration_dialog::button_candy(int i)
             msg->setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
             msg->setText("你的探索手杖可以使用，会将本次探索结果变为1。\n你是否想要使用？");
             msg->setWindowTitle("是否使用探索手杖？");
-            msg->exec();
-            if (msg->result() == 1)
+            if (msg->exec() == QMessageBox::Ok)
             {
                 game->use_tool(1);
                 done(1);
@@ -161,6 +162,7 @@ void exploration_dialog::button_candy(int i)
             ui->roll_button->show();
             ui->die_result_1->hide();
             ui->die_result_2->hide();
+            for (auto& button : buttons) button->hide();
         }
     }
 }
