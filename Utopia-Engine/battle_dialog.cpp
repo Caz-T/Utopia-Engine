@@ -14,6 +14,7 @@ battle_dialog::battle_dialog(game_controller* gm, int rg, int lv, QWidget *paren
     ui->setupUi(this);
 
     setWindowTitle(QString("遭遇战！"));
+    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
     update_hearts();
 
     QString monster_info = "怪物信息：\n";
@@ -27,7 +28,7 @@ battle_dialog::battle_dialog(game_controller* gm, int rg, int lv, QWidget *paren
 
 
     // deals with events, artifacts and treasures.
-    if (game->location_event(region) == 1)
+    if (game->event_location(0) == region)
     {
         monster_info.append(event_names_zh[1] + QString("——此区域遭遇战等级已+2\n"));
     }
@@ -68,13 +69,11 @@ battle_dialog::battle_dialog(game_controller* gm, int rg, int lv, QWidget *paren
         ui->para_hint->setText(QString("你的") + tool_names_zh[2] + QString("可以使用。"));
         ui->use_para->setText(QString("使用") + tool_names_zh[2]);
     }
-    else
-    {
-        ui->para_hint->hide();
-        ui->use_para->hide();
-    }
+    ui->para_hint->hide();
+    ui->use_para->hide();
     ui->roll_dice->show();
     ui->proceed_button->hide();
+    ui->loot_roll->hide();
 }
 
 battle_dialog::~battle_dialog()
@@ -85,6 +84,7 @@ battle_dialog::~battle_dialog()
 void battle_dialog::update_hearts()
 {
     QLabel* hearts[6] = {ui->heart_1, ui->heart_2, ui->heart_3, ui->heart_4, ui->heart_5, ui->heart_6};
+    for (auto& label : hearts) label->setScaledContents(true);
     int i;
     for (i = 0; i < game->hp(); i++) hearts[i]->setPixmap(QPixmap(":/full_heart"));
     for (; i < 6; i++) hearts[i]->setPixmap(QPixmap(":/empty_heart"));
@@ -115,6 +115,8 @@ void battle_dialog::on_use_para_clicked()
     if (result_2 > 6) result_2 = 6;
     ui->para_hint->hide();
     ui->use_para->hide();
+    dice::show_dice_result(ui->die_result_1, result_1);
+    dice::show_dice_result(ui->die_result_2, result_2);
 }
 
 
@@ -141,8 +143,8 @@ void battle_dialog::on_proceed_button_clicked()
             ui->loot_roll->show();
             if (game->hp() > hp_lost)
             {
-                hp_lost = 0;
                 game->change_hp(-hp_lost);
+                hp_lost = 0;
             }
             else
             {
@@ -154,7 +156,11 @@ void battle_dialog::on_proceed_button_clicked()
             msg.exec();
         }
     }
-    else if (game->change_hp(-hp_lost)) done(-1);
+    else
+    {
+        ui->roll_dice->show();
+        if (game->change_hp(-hp_lost)) done(-1);
+    }
     update_hearts();
 }
 
@@ -180,6 +186,7 @@ void battle_dialog::on_loot_roll_clicked()
         setResult(2);
     }
     else setResult(1);
+    msg.exec();
     if (hp_lost > 0) game->change_hp(-hp_lost);
     done(result());
 }

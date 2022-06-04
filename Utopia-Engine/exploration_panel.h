@@ -29,6 +29,8 @@ private slots:
     void on_city_button_clicked();
     void on_maw_button_clicked();
 
+    void on_use_seal_clicked();
+
 private:
     Ui::exploration_panel *ui;
 

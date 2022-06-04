@@ -23,7 +23,7 @@ public:
     int storage(int code) const;
     bool tool_available(int code) const;
     int expl_progress(int code) const;
-    int location_event(int code) const;
+    int event_location(int code) const;
     int artifact_status(int code) const;
     bool treasure_found(int code) const;
     bool seal_of_balance_available() const;
@@ -31,6 +31,7 @@ public:
     int link_value(int code) const;
     int activation_energy(int code) const;
     int wastebasket_slots() const;
+
 
     // some setters, each completing its own logic
     bool change_hp(int count); // default = false. True means character unconscious. if character dies, this function just kills the game
@@ -52,8 +53,9 @@ public:
 
     // usage of one-time stuff. for tools, setting flag to true means recharging it.
     void use_tool(int tool_id, bool flag = false);
-    void use_seal_of_balance();
+    void use_seal_of_balance(int loc);
     void use_the_ancient_record();
+
 
 public slots:
     // Save & Load
@@ -89,7 +91,7 @@ private:
 
     // exploration
     int _expl_progress[6] = {0}; // progress of exploration.
-    int _location_event[6] = {0}; // event at each location. 0: null, 1: active monster, 2: fleeting vision, 3: good fortune, 4: foul weather
+    int _event_location[4] = {-1, -1, -1, -1}; // location of each event. 0: active monster, 1: fleeting vision, 2: good fortune, 3: foul weather
     int _artifact_status[6] = {0}; // 0: not found, 1: found, 2: activated
     bool _treasure_found[6] = {false}; // whether treasures are found
     bool _seal_of_balance_available = false; // remember to set this to true when acquiring seal of balance.

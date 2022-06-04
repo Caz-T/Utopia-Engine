@@ -64,10 +64,52 @@ void exploration_panel::refresh_panel()
         temp_stylesheet += "}";
         arti_labels[i]->setStyleSheet(temp_stylesheet);
     }
+    if (game->seal_of_balance_available()) ui->use_seal->show();
+    else ui->use_seal->hide();
+
+    // show events
+    QLabel* events[6] = {ui->peak_event, ui->wilds_event, ui->marshes_event, ui->canyon_event, ui->city_event, ui->maw_event};
+    int event_style[6] = {0};
+    QLabel* spare_events[6][4] = {
+        {ui->label_25, ui->label_26, ui->label_27, ui->label_28},
+        {ui->label_29, ui->label_30, ui->label_31, ui->label_32},
+        {ui->label_39, ui->label_40, ui->label_33, ui->label_34},
+        {ui->label_37, ui->label_38, ui->label_35, ui->label_36},
+        {ui->label_47, ui->label_48, ui->label_41, ui->label_42},
+        {ui->label_45, ui->label_46, ui->label_43, ui->label_44}
+    }; // hard-coded.
+    for (i = 0; i < 4; i++)
+        if (game->event_location(i) == -1) continue;
+        else event_style[game->event_location(i)] += std::exp2(i);
+    for (i = 0; i < 6; i++)
+    {
+        int k = event_style[i];
+        if (k == 1 or k == 2 or k == 4 or k == 8)
+        {
+            for (auto& label : spare_events[i]) label->hide();
+            events[i]->setPixmap(QPixmap(QString(":/event/") + QString::number(std::log2(k))));
+            events[i]->setScaledContents(true);
+            events[i]->show();
+        }
+        else
+        {
+            events[i]->hide();
+            for (int j = 0; j < 4; j++)
+                if (k & (int)exp2(j)) spare_events[i][j]->setPixmap(QPixmap(QString(":/event/") + QString::number(j)));
+                else spare_events[i][j]->setPixmap(QPixmap());
+            for (auto& label : spare_events[i])
+            {
+                label->setScaledContents(true);
+                label->show();
+            }
+        }
+    }
 
     // show exploration status
     QProgressBar* prog[6] = {ui->peak_bar, ui->peak_bar_2, ui->peak_bar_3, ui->peak_bar_4, ui->peak_bar_5, ui->peak_bar_6};
     for (i = 0; i < 6; i++) prog[i]->setValue(game->expl_progress(i));
+
+
 
     panel::refresh_panel();
 }
@@ -109,7 +151,7 @@ void exploration_panel::explore(int id)
         if (r < 0) r = -r + 99;
         if (r > 555) r = 555;
         int encounter_level = r / 100;
-        if (game->location_event(id) == 1)
+        if (game->event_location(0) == id)
         {
             encounter_level += 2;
             if (encounter_level > 5) encounter_level = 5;
@@ -140,3 +182,28 @@ void exploration_panel::on_marshes_button_clicked() {explore(2);}
 void exploration_panel::on_canyon_button_clicked() {explore(3);}
 void exploration_panel::on_city_button_clicked() {explore(4);}
 void exploration_panel::on_maw_button_clicked() {explore(5);}
+
+void exploration_panel::on_use_seal_clicked()
+{
+    QMessageBox msg;
+    msg.setWindowTitle(QString("使用") + artifact_names_zh[0]);
+    msg.setText(QString("在哪里使用") + artifact_names_zh[0] + QString("？"));
+    msg.setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+
+    QPushButton* dlgbuttons[7];
+    for (int i = 0; i < 6; i++) dlgbuttons[i] = msg.addButton(location_names_zh[i], (QMessageBox::ButtonRole)5);
+    dlgbuttons[6] = msg.addButton("取消", (QMessageBox::ButtonRole)6);
+    msg.setDefaultButton(dlgbuttons[6]);
+    msg.exec();
+    for (int i = 0; i < 6; i++)
+    {
+        if (msg.clickedButton() == dlgbuttons[i])
+        {
+            game->use_seal_of_balance(i);
+            ui->use_seal->hide();
+            refresh_panel();
+            return;
+        }
+    }
+}
+

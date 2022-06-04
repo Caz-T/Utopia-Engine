@@ -33,10 +33,10 @@
         <file>legendary_treasure/the_molten_shard.png</file>
     </qresource>
     <qresource prefix="/event">
-        <file>event/icons8-aim-98.png</file>
-        <file>event/icons8-four-leaf-clover-96.png</file>
-        <file>event/icons8-monster-64.png</file>
-        <file>event/icons8-storm-80.png</file>
+        <file alias="1">event/icons8-aim-98.png</file>
+        <file alias="2">event/icons8-four-leaf-clover-96.png</file>
+        <file alias="0">event/icons8-monster-64.png</file>
+        <file alias="3">event/icons8-storm-80.png</file>
     </qresource>
     <qresource prefix="/resource">
         <file alias="quartz">resource/icons8-quartz-60.png</file>

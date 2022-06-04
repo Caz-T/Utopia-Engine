@@ -19,7 +19,7 @@ int game_controller::position() const {return _position;}
 int game_controller::storage(int code) const {return _storage[code];}
 bool game_controller::tool_available(int code) const {return _tool_available[code];}
 int game_controller::expl_progress(int code) const {return _expl_progress[code];}
-int game_controller::location_event(int code) const {return _location_event[code];}
+int game_controller::event_location(int code) const {return _event_location[code];}
 int game_controller::artifact_status(int code) const {return _artifact_status[code];}
 bool game_controller::treasure_found(int code) const {return _treasure_found[code];}
 bool game_controller::seal_of_balance_available() const {return _seal_of_balance_available;}
@@ -59,7 +59,7 @@ bool game_controller::save_game()
     for (int i = 0; i <= 5; i++) saveout << _storage[i] << ' '; saveout << Qt::endl; // intended to keep them in the same line.
     for (int i = 0; i <= 2; i++) saveout << (_tool_available[i] ? 1 : 0) << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _expl_progress[i] << ' '; saveout << Qt::endl;
-    for (int i = 0; i <= 5; i++) saveout << _location_event[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 3; i++) saveout << _event_location[i] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _artifact_status[i] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << (_treasure_found[i] ? 1 : 0) << ' '; saveout << Qt::endl;
     saveout << (_seal_of_balance_available ? 1 : 0) << (_the_ancient_record_available ? 1 : 0) << Qt::endl;
@@ -87,7 +87,7 @@ bool game_controller::load_game()
         for (int i = 0; i <= 5; i++) {loadin >> _storage[i]; if (_storage[i] < 0 or _storage[i] > 4) throw 4;}
         for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_tool_available[i] = true; break; case 0:_tool_available[i] = false; break; default: throw 5;}}
         for (int i = 0; i <= 5; i++) {loadin >> _expl_progress[i]; if (_expl_progress[i] < 0 or _expl_progress[i] > 6) throw 6;}
-        for (int i = 0; i <= 5; i++) {loadin >> _location_event[i]; if (_location_event[i] < 0 or _location_event[i] > 4) throw 7;}
+        for (int i = 0; i <= 3; i++) {loadin >> _event_location[i]; if (_event_location[i] < 0 or _event_location[i] > 6) throw 7;}
         for (int i = 0; i <= 5; i++) {loadin >> _artifact_status[i]; if (_artifact_status[i] < 0 or _artifact_status[i] > 2) throw 8;}
         for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_treasure_found[i] = true; break; case 0:_treasure_found[i] = false; break; default: throw 9;}}
         loadin >> num; switch(num){case 1:_seal_of_balance_available = true; break; case 0:_seal_of_balance_available = false; break; default: throw 10;}
@@ -106,7 +106,13 @@ bool game_controller::load_game()
 }
 
 void game_controller::use_tool(int tool_id, bool flag) {_tool_available[tool_id] = flag;}
-void game_controller::use_seal_of_balance() {_seal_of_balance_available = false;}
+void game_controller::use_seal_of_balance(int loc)
+{
+    _seal_of_balance_available = false;
+    for (int i = 0; i < 4; i++)
+        if (_event_location[i] == loc)
+            _event_location[i] = -1;
+}
 void game_controller::use_the_ancient_record() {_the_ancient_record_available = false;}
 void game_controller::day_progress()
 {
@@ -132,11 +138,16 @@ void game_controller::find_artifact(int id)
 {
     if (_artifact_status[id] != 0) qDebug() << "artifact status exception! artifact code: " << id << " status: " << _artifact_status[id];
     else _artifact_status[id] = 1;
+
 }
 void game_controller::activate_artifact(int id)
 {
     if (_artifact_status[id] != 1) qDebug() << "artifact status exception! artifact code: " << id << " status: " << _artifact_status[id];
-    else _artifact_status[id] = 2;
+    else
+    {
+        if (id == 0) _seal_of_balance_available = true;
+        _artifact_status[id] = 2;
+    }
 }
 void game_controller::proceed_exploration(int id)
 {
@@ -161,9 +172,9 @@ void game_controller::reroll_events()
     QString message = "事件重置了！新的事件为：\n";
     for (int i = 0; i < 4; i++)
     {
-        int ret = d6->roll();
-        _location_event[ret] = i;
-        message += event_names_zh[i];
+        int ret = d6->roll() - 1;
+        _event_location[i] = ret;
+        message += event_names_zh[i+1];
         message += "：";
         message += location_names_zh[ret];
         message += "\n";
@@ -171,4 +182,9 @@ void game_controller::reroll_events()
     QMessageBox msg;
     msg.setText(message);
     msg.exec();
+}
+void game_controller::find_treasure(int id)
+{
+    _treasure_found[id] = true;
+    if (id == 4) _the_ancient_record_available = true;
 }

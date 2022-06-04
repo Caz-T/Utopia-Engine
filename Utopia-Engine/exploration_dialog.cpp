@@ -30,7 +30,7 @@ exploration_dialog::exploration_dialog(game_controller* gm, int id, QWidget *par
 
     setWindowTitle(QString("探索：") + location_names_zh[id]);
     QString envi_text = "当前环境效果：\n";
-    if (game->location_event(location_id) == 3) envi_text.append("好运气——搜索结果-10\n");
+    if (game->event_location(2) == location_id) envi_text.append("好运气——搜索结果-10\n");
     if (game->artifact_status(1) == 2 and (location_id == 0 or location_id == 5)) envi_text.append("隐士之镜——此处搜索结果-10\n");
     if (game->artifact_status(4) == 2 and (location_id == 2 or location_id == 3)) envi_text.append("预示棱镜——此处搜索结果-10\n");
     ui->envi_effects->setText(envi_text);
@@ -95,7 +95,7 @@ void exploration_dialog::button_candy(int i)
                 return;
             }
         }
-        if (game->location_event(location_id) == 3)
+        if (game->event_location(2) == location_id)
         {
             QMessageBox* msg = new QMessageBox(this);
             msg->setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
