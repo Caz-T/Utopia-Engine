@@ -10,7 +10,6 @@ CONFIG += c++17
 
 SOURCES += \
     activation_dialog.cpp \
-    backpack_panel.cpp \
     battle_dialog.cpp \
     connection_dialog.cpp \
     dice.cpp \
@@ -24,7 +23,6 @@ SOURCES += \
 
 HEADERS += \
     activation_dialog.h \
-    backpack_panel.h \
     battle_dialog.h \
     connection_dialog.h \
     constants.h \
@@ -38,7 +36,6 @@ HEADERS += \
 
 FORMS += \
     activation_dialog.ui \
-    backpack_panel.ui \
     battle_dialog.ui \
     connection_dialog.ui \
     exploration_dialog.ui \
