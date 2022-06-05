@@ -54,7 +54,13 @@ private slots:
     void dim_bg();
     void change_pic();
 
-    void on_startButton_clicked();
-    void on_loadButton_clicked();
+    void on_start_button_clicked();
+    void on_load_button_clicked();
+
+    void on_quit_button_clicked();
+
+public slots:
+    void game_end(QString, QString);
+
 };
 #endif // MAINWINDOW_H

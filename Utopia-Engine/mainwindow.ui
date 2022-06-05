@@ -51,7 +51,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="startButton">
+   <widget class="QPushButton" name="start_button">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -60,11 +60,16 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>开始游戏</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="loadButton">
+   <widget class="QPushButton" name="load_button">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -73,11 +78,16 @@
       <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string>读取存档</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="quitButton">
+   <widget class="QPushButton" name="quit_button">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -85,6 +95,11 @@
       <width>231</width>
       <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>退出游戏</string>
