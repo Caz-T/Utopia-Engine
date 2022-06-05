@@ -1,6 +1,8 @@
 #include "worktable_panel.h"
 #include "ui_worktable_panel.h"
 
+#include <QInputDialog>
+
 worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
     panel(gm, parent),
     ui(new Ui::worktable_panel)
@@ -108,5 +110,26 @@ void worktable_panel::on_leave_worktable_clicked()
     msg.setText("是否确定离开工作台？");
     msg.setStandardButtons(QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel);
     if (msg.exec() == QMessageBox::StandardButton::Ok) emit switch_panel_signal(1, this);
+}
+
+
+void worktable_panel::on_sleep_button_clicked()
+{
+    QInputDialog msg(this);
+    msg.setWindowTitle("诡谲的日光映在窗框上....");
+    msg.setLabelText("末日将近，你担心自己会和这个世界一同沉沉睡去。（或许这样也挺好？）\n感谢现代文明，你的工作室颇为舒适。\n如果你连续休息3天以上，可以额外回复一点生命值。\n你希望休息几天？");
+    msg.setIntMinimum(0);
+    msg.setIntMaximum(game->doomsday() - game->date());
+    msg.setInputMode(QInputDialog::IntInput);
+    msg.setOkButtonText("入睡");
+    msg.setCancelButtonText("起身");
+    msg.exec();
+    game->rest(msg.intValue(), true);
+}
+
+
+void worktable_panel::on_menu_button_clicked()
+{
+    show_menu();
 }
 

@@ -22,6 +22,10 @@ public slots:
 private slots:
     void on_leave_worktable_clicked();
 
+    void on_sleep_button_clicked();
+
+    void on_menu_button_clicked();
+
 private:
     Ui::worktable_panel *ui;
 };

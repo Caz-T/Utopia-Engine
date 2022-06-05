@@ -218,9 +218,9 @@
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>45</y>
+     <y>40</y>
      <width>131</width>
-     <height>71</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -630,19 +630,6 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="sleep_button">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>10</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>美美入睡</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="artifact_button_1">
    <property name="geometry">
     <rect>
@@ -983,6 +970,43 @@
    </property>
    <property name="text">
     <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="sleep_button">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>80</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>入睡</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="menu_button">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>10</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Helvetica</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>存档并退出</string>
    </property>
   </widget>
  </widget>
