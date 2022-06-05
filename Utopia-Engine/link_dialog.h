@@ -1,27 +1,27 @@
-#ifndef CONNECTION_DIALOG_H
-#define CONNECTION_DIALOG_H
+#ifndef LINK_DIALOG_H
+#define LINK_DIALOG_H
 
 #include <QLabel>
 #include <QPushButton>
 #include <QDialog>
 
 namespace Ui {
-class connection_dialog;
+class link_dialog;
 }
 
-class connection_dialog : public QDialog
+class link_dialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit connection_dialog(QWidget *parent = nullptr);
-    ~connection_dialog();
+    explicit link_dialog(QWidget *parent = nullptr);
+    ~link_dialog();
 
 private:
-    Ui::connection_dialog *ui;
+    Ui::link_dialog *ui;
 
 
 
 };
 
-#endif // CONNECTION_DIALOG_H
+#endif // LINK_DIALOG_H
