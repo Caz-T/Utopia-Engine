@@ -11,11 +11,11 @@ CONFIG += c++17
 SOURCES += \
     activation_dialog.cpp \
     battle_dialog.cpp \
-    connection_dialog.cpp \
     dice.cpp \
     exploration_dialog.cpp \
     exploration_panel.cpp \
     game_controller.cpp \
+    link_dialog.cpp \
     main.cpp \
     mainwindow.cpp \
     panel.cpp \
@@ -24,12 +24,12 @@ SOURCES += \
 HEADERS += \
     activation_dialog.h \
     battle_dialog.h \
-    connection_dialog.h \
     constants.h \
     dice.h \
     exploration_dialog.h \
     exploration_panel.h \
     game_controller.h \
+    link_dialog.h \
     mainwindow.h \
     panel.h \
     worktable_panel.h
@@ -37,9 +37,9 @@ HEADERS += \
 FORMS += \
     activation_dialog.ui \
     battle_dialog.ui \
-    connection_dialog.ui \
     exploration_dialog.ui \
     exploration_panel.ui \
+    link_dialog.ui \
     mainwindow.ui \
     worktable_panel.ui
 
