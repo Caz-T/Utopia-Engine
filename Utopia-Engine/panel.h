@@ -13,6 +13,7 @@ class panel : public QWidget
     Q_OBJECT
 public:
     explicit panel(game_controller* gm, QWidget *parent = nullptr);
+    ~panel() = default;
 
 public slots:
     // we require all panels' refreshing and closing to be slots

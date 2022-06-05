@@ -108,10 +108,13 @@ void MainWindow::hide_main_window()
 }
 void MainWindow::return_to_menu()
 {
+
+
     delete game;
-    delete exploration;
-    delete worktable;
+    exploration->close();
+    worktable->close();
     // IMPLEMENT this is only a temporary fix.
+
     close();
     //beginning();
 }
