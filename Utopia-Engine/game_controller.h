@@ -37,6 +37,7 @@ public:
     // some setters, each completing its own logic
     bool change_hp(int count); // default = false. True means character unconscious. if character dies, this function just kills the game
     void charge_god_hand(int increment);
+    void rest(int days, bool is_at_worktable);
 
 
     // exploration-related
@@ -48,6 +49,7 @@ public:
 
     // worktable-related
     void activate_artifact(int id);
+    void increase_activate_attempt(int id);
     void add_link_value(int id, int increment);
     void dump_dice();
 
@@ -109,10 +111,9 @@ private:
     // data part ended
 
     // private setters:
-    void day_progress();
+    void day_progress(int count = 1);
     void reroll_events();
-
-
+    void recover_from_unconsciousness();
 
 
 
@@ -122,7 +123,7 @@ private:
 
 
 signals:
-
+    int game_end(QString title, QString explanation); // passes a string to MainWindow's slot
 };
 
 #endif // GAME_CONTROLLER_H

@@ -21,6 +21,7 @@ public slots:
 
 protected:
     game_controller* game;
+    void show_menu();
 
 signals:
     void switch_panel_signal(int target, panel* sender);

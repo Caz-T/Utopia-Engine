@@ -34,12 +34,15 @@ bool game_controller::change_hp(int count)
     _hp += count;
     if (_hp < 0)
     {
-        // IMPLEMENT death ending
+        emit game_end("你死了", "你于对抗末日的旅程中长眠。\n"
+                      "末日将至的世界险象环生，你很走运，至少活到了现在。\n"
+                      "你的死同时意味着这个世界再无生还可能。\n"
+                      "你向世界致以最后的晚安。");
         return true;
     }
     else if (_hp == 0)
     {
-        // IMPLEMENT unconsciousness
+        recover_from_unconsciousness();
         return true;
     }
     else if (_hp > 6)
@@ -101,10 +104,17 @@ bool game_controller::load_game()
     }
     catch (...)
     {
-        //IMPLEMENT error message
-        return false;
+        QMessageBox msg;
+        msg.setWindowTitle("存档读取错误");
+        msg.setText("读取存档时发生错误。是否重试，或直接开始新游戏？");
+        msg.addButton("开始新游戏", QMessageBox::AcceptRole);
+        msg.addButton("重试", QMessageBox::RejectRole);
+        if (msg.exec() == QMessageBox::Accepted) load_game(); // IMPLEMENT fix this strange thing.
+        else return false;
     }
-    // IMPLEMENT success message
+    QMessageBox msg;
+    msg.setWindowTitle("存档读取成功");
+    msg.setText("存档读取成功！");
     return true;
 }
 
@@ -117,14 +127,22 @@ void game_controller::use_seal_of_balance(int loc)
             _event_location[i] = -1;
 }
 void game_controller::use_the_ancient_record() {_the_ancient_record_available = false;}
-void game_controller::day_progress()
+void game_controller::day_progress(int count)
 {
-    _date++;
-    if (_date >= _doomsday)
+    bool flag = false;
+    while (count--)
     {
-        //IMPLEMENT DOOMSDAY
+        _date++;
+        if (_date % 3 == 2) flag = true;
+        if (_date >= _doomsday)
+        {
+            emit game_end("末日降临", "一切归于尘土。\n"
+                          "尽管你夜以继日地搜寻组件、组装乌托邦引擎，你仍然没能从注定的末日中救下这个世界。\n"
+                          "\"空想之根落下。最后的希望存于虚空之中。\"");
+            break;
+        }
     }
-    if (_date % 3 == 2) reroll_events();
+    if (flag) reroll_events();
 }
 void game_controller::charge_god_hand(int increment)
 {
@@ -206,3 +224,19 @@ void game_controller::clean_exploration_progress()
 {
     for (int i = 0; i < 6; i++) _expl_progress[i] = 0;
 }
+void game_controller::rest(int days, bool is_at_worktable)
+{
+    for (int i = 0; i < days; i++) day_progress();
+    change_hp(days + (is_at_worktable and days >= 3 ? 1 : 0));
+}
+void game_controller::recover_from_unconsciousness()
+{
+    _hp = 6;
+    if (_artifact_status[2] == 2) day_progress(4);
+    else day_progress(6);
+    QMessageBox msg;
+    msg.setWindowTitle("你逐渐恢复意识...");
+    msg.setText(QString("眼前一黑，你昏迷了。\n应急医疗系统把你传送回了工作室，") + QString::number(_artifact_status[2] == 2 ? 4 : 6) + QString("天后你才醒来。\n继续工作吧，末日不会等你太久。"));
+    msg.exec();
+}
+void game_controller::increase_activate_attempt(int id) {_activation_attempt[id] ++;}

@@ -1419,13 +1419,13 @@
     <enum>QLCDNumber::Flat</enum>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="return_to_worktable">
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>45</y>
+     <y>40</y>
      <width>131</width>
-     <height>71</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
@@ -1840,6 +1840,43 @@
     <string/>
    </property>
   </widget>
+  <widget class="QPushButton" name="camp_button">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>80</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>临时扎营</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="menu_button">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>10</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Helvetica</family>
+     <pointsize>18</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>存档并退出</string>
+   </property>
+  </widget>
   <zorder>calendar_label</zorder>
   <zorder>days_left</zorder>
   <zorder>peak_button</zorder>
@@ -1912,7 +1949,7 @@
   <zorder>label_24</zorder>
   <zorder>compo_count_6</zorder>
   <zorder>compo_count_4</zorder>
-  <zorder>pushButton</zorder>
+  <zorder>return_to_worktable</zorder>
   <zorder>use_seal</zorder>
   <zorder>peak_event</zorder>
   <zorder>wilds_event</zorder>
@@ -1944,6 +1981,8 @@
   <zorder>label_46</zorder>
   <zorder>label_47</zorder>
   <zorder>label_48</zorder>
+  <zorder>camp_button</zorder>
+  <zorder>menu_button</zorder>
  </widget>
  <resources>
   <include location="resources/resources.qrc"/>

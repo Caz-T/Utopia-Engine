@@ -31,7 +31,12 @@ private slots:
 
     void on_use_seal_clicked();
 
-    void on_pushButton_clicked();
+
+    void on_return_to_worktable_clicked();
+
+    void on_camp_button_clicked();
+
+    void on_menu_button_clicked();
 
 private:
     Ui::exploration_panel *ui;

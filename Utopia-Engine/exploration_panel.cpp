@@ -1,6 +1,7 @@
 #include "exploration_panel.h"
 #include "ui_exploration_panel.h"
 #include <QDebug>
+#include <QInputDialog>
 
 exploration_panel::exploration_panel(game_controller* gm, QWidget *parent) :
     panel(gm, parent),
@@ -210,7 +211,7 @@ void exploration_panel::on_use_seal_clicked()
 }
 
 
-void exploration_panel::on_pushButton_clicked()
+void exploration_panel::on_return_to_worktable_clicked()
 {
     QMessageBox msg;
     msg.setText("是否确定离开探索区域？\n目前的探索进度将被清空。");
@@ -220,5 +221,27 @@ void exploration_panel::on_pushButton_clicked()
         for (int i = 0; i < 6; i++) game->clean_exploration_progress();
         emit switch_panel_signal(2, this);
     }
+}
+
+
+
+void exploration_panel::on_camp_button_clicked()
+{
+    QInputDialog msg(this);
+    msg.setWindowTitle("容身之地");
+    msg.setLabelText("略感疲乏，你寻找到一处安全的地方。这里并不舒适，但至少足以歇脚。\n你希望休息几天？");
+    msg.setIntMinimum(0);
+    msg.setIntMaximum(game->doomsday() - game->date());
+    msg.setInputMode(QInputDialog::IntInput);
+    msg.setOkButtonText("休息");
+    msg.setCancelButtonText("起身离开");
+    msg.exec();
+    game->rest(msg.intValue(), false);
+}
+
+
+void exploration_panel::on_menu_button_clicked()
+{
+    show_menu();
 }
 
