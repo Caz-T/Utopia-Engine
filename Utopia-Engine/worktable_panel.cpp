@@ -13,6 +13,7 @@ worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
     ui->setupUi(this);
 
 
+
     refresh_panel();
     this->hide(); // by default everything is hidden when created
 }
@@ -103,7 +104,6 @@ void worktable_panel::refresh_panel()
         for (auto& button : link_buttons) button->hide();
         for (auto& label : link_labels) label->hide();
     }
-
     panel::refresh_panel();
 }
 
@@ -145,6 +145,7 @@ void worktable_panel::activate(int i)
         msg.exec();
         game->increase_activate_energy(i, 1);
     }
+    if (game->activation_attempt(i) == 1) game->day_progress();
     activation_dialog act_dlg(game, i, this);
     game->increase_activate_energy(i, act_dlg.exec());
     if (game->activation_attempt(i) == 2 and game->artifact_status(i) == 1) // two tries but no activation
@@ -155,10 +156,40 @@ void worktable_panel::activate(int i)
         game->day_progress();
         game->activate_artifact(i);
     }
+    refresh_panel();
 }
 
 void worktable_panel::link(int i)
 {
-    link_dialog dlg(game, i, this);
-    dlg.exec();
+    if (game->storage(i) < 1)
+    {
+        QMessageBox msg;
+        msg.setWindowTitle("资源组建不足！");
+        msg.setText(QString("你需要寻找至少一份") + component_names_zh[i] + QString("才能开始链接！"));
+        msg.exec();
+    }
+    else
+    {
+        link_dialog dlg(game, i, this);
+        dlg.exec();
+    }
+    qDebug() << "Link value:";
+    for (int i = 0; i < 5; i++) qDebug() << game->link_value(i);
+    refresh_panel();
 }
+
+void worktable_panel::on_artifact_button_1_clicked() {activate(0);}
+void worktable_panel::on_artifact_button_2_clicked() {activate(1);}
+void worktable_panel::on_artifact_button_3_clicked() {activate(2);}
+void worktable_panel::on_artifact_button_4_clicked() {activate(3);}
+void worktable_panel::on_artifact_button_5_clicked() {activate(4);}
+void worktable_panel::on_artifact_button_6_clicked() {activate(5);}
+
+
+void worktable_panel::on_link_button_1_clicked() {link(0);}
+void worktable_panel::on_link_button_2_clicked() {link(1);}
+void worktable_panel::on_link_button_3_clicked() {link(2);}
+void worktable_panel::on_link_button_4_clicked() {link(3);}
+void worktable_panel::on_link_button_5_clicked() {link(4);}
+void worktable_panel::on_link_button_6_clicked() {link(5);}
+

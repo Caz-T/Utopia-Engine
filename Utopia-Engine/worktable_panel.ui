@@ -826,7 +826,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>链接</string>
    </property>
   </widget>
   <widget class="QLabel" name="link_label_2">
@@ -865,7 +865,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>链接</string>
    </property>
   </widget>
   <widget class="QLabel" name="link_label_3">
@@ -891,7 +891,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>链接</string>
    </property>
   </widget>
   <widget class="QLabel" name="link_label_6">
@@ -917,7 +917,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>链接</string>
    </property>
   </widget>
   <widget class="QLabel" name="link_label_4">
@@ -943,7 +943,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>链接</string>
    </property>
   </widget>
   <widget class="QPushButton" name="link_button_1">
@@ -956,7 +956,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
+    <string>链接</string>
    </property>
   </widget>
   <widget class="QLabel" name="link_label_1">

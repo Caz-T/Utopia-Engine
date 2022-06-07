@@ -7,7 +7,8 @@ link_dialog::link_dialog(game_controller* gm, int link_id, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::link_dialog),
     link_number(link_id),
-    game(gm)
+    game(gm),
+    d6(new dice)
 {
     ui->setupUi(this);
 
@@ -32,10 +33,49 @@ link_dialog::link_dialog(game_controller* gm, int link_id, QWidget *parent) :
     setWindowTitle("正在尝试链接...");
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
     ui->roll_button->show();
-    ui->discard_button->hide();
-    ui->quit_button->hide();
     update_status();
+    ui->discard_button->hide();
+    ui->quit_button->show();
 
+
+    int i;
+    for (i = 0; i < 3; i++)
+    {
+        if (game->link_number(link_number, i) * game->link_number(link_number, i + 3) == 0) minus_results[i] = -1;
+        else minus_results[i] = game->link_number(link_number, i) - game->link_number(link_number, i + 3);
+    }
+    // update numbers
+    for (i = 0; i < 6; i++)
+    {
+        if (game->link_number(link_number, i) != 0)
+        {
+            dice::show_dice_result(number_labels[i], game->link_number(link_number, i));
+            number_labels[i]->show();
+        }
+        else
+        {
+            number_labels[i]->hide();
+        }
+    }
+    for (auto& button : number_buttons) button->hide();
+
+    // update results
+    for (i = 0; i < 3; i++)
+    {
+        switch (minus_results[i])
+        {
+        case -1:
+            result_labels[i]->hide();
+            break;
+        case 0:
+            result_labels[i]->setPixmap(QPixmap(":/star"));
+            result_labels[i]->show();
+            break;
+        default:
+            result_labels[i]->setPixmap(QPixmap(QString(":/circled_") + QString::number(minus_results[i])));
+            result_labels[i]->show();
+        }
+    }
 }
 
 link_dialog::~link_dialog()
@@ -63,57 +103,29 @@ void link_dialog::update_status()
     for (i = 0; i < game->hp(); i++) hearts[i]->setPixmap(QPixmap(":/full_heart"));
     for (; i < 6; i++) hearts[i]->setPixmap(QPixmap(":/empty_heart"));
 
-    // update numbers
-    for (i = 0; i < 6; i++)
-    {
-        if (game->link_number(link_number, i) == 0)
-        {
-            dice::show_dice_result(number_labels[i], game->link_number(link_number, i));
-            number_labels[i]->show();
-            number_buttons[i]->hide();
-        }
-        else
-        {
-            number_labels[i]->hide();
-            number_buttons[i]->show();
-        }
-    }
-
-    // update results
-    for (i = 0; i < 3; i++)
-    {
-        switch (minus_results[i])
-        {
-        case -1:
-            result_labels[i]->hide();
-            break;
-        case 0:
-            result_labels[i]->setPixmap(QPixmap(":/star"));
-            result_labels[i]->show();
-            break;
-        default:
-            result_labels[i]->setPixmap(QPixmap(QString(":/circled_") + QString::number(minus_results[i])));
-            result_labels[i]->show();
-        }
-    }
-
     // update bin status
     ui->wastepaper_hint->setText(QString("废纸篓空位：") + QString::number(game->wastebasket_slots()));
     if (!ui->roll_button->isVisible() and game->wastebasket_slots() > 0) ui->discard_button->show();
     else ui->discard_button->hide();
+
+    if (ui->roll_button->isVisible()) ui->quit_button->show();
+    else ui->quit_button->hide();
 }
 
 void link_dialog::button_candy(int i)
 {
+    number_buttons[i]->hide();
     if (result_1 == 0)
     {
         game->set_link_number(link_number, i, result_2);
+        dice::show_dice_result(number_labels[i], result_2);
         result_2 = 0;
         ui->die_result_2->hide();
     }
     else
     {
         game->set_link_number(link_number, i, result_1);
+        dice::show_dice_result(number_labels[i], result_1);
         result_1 = 0;
         ui->die_result_1->hide();
     }
@@ -121,8 +133,8 @@ void link_dialog::button_candy(int i)
     int small_num = opposite_number > i ? i : opposite_number;
     if (game->link_number(link_number, opposite_number) != 0)
     {
-        minus_results[i] = i >= 3 ? game->link_number(link_number, i) - game->link_number(link_number, opposite_number) : game->link_number(link_number, opposite_number) - game->link_number(link_number, i);
-        switch(minus_results[i])
+        minus_results[small_num] = i <= 2 ? game->link_number(link_number, i) - game->link_number(link_number, opposite_number) : game->link_number(link_number, opposite_number) - game->link_number(link_number, i);
+        switch(minus_results[small_num])
         {
         case 0:
             result_labels[small_num]->setPixmap(QPixmap(":/star"));
@@ -146,9 +158,9 @@ void link_dialog::button_candy(int i)
             else msg.exec();
         }
     }
+    update_status();
     bool flag = true;
     for (int i = 0; i < 6; i++) if (game->link_number(link_number, i) == 0) flag = false;
-    update_status();
     if (flag)
     {
         game->use_component(link_number);
@@ -168,10 +180,10 @@ void link_dialog::button_candy(int i)
             ui->roll_button->show();
             ui->die_result_1->hide();
             ui->die_result_2->hide();
-            ui->quit_button->hide();
+            ui->quit_button->show();
             for (auto& button : number_buttons) button->hide();
         }
-    }
+    } 
 }
 
 void link_dialog::on_quit_button_clicked()
@@ -198,6 +210,7 @@ void link_dialog::on_discard_button_clicked()
         result_1 = 0;
         ui->die_result_1->hide();
     }
+
 }
 
 void link_dialog::on_place_button_1_clicked() {button_candy(0);}

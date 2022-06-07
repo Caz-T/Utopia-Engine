@@ -135,6 +135,7 @@ void game_controller::use_the_ancient_record() {_the_ancient_record_available = 
 void game_controller::day_progress(int count)
 {
     bool flag = false;
+    if (_treasure_found[3]) change_hp(1);
     while (count--)
     {
         _date++;
@@ -216,14 +217,7 @@ void game_controller::find_treasure(int id)
 }
 void game_controller::add_link_value(int id, int increment)
 {
-    if (_activation_attempt[id] >= 2) return;
-    _activation_attempt[id] ++;
-    _activation_energy[id] += increment;
-    if (_activation_energy[id] > 4)
-    {
-        charge_god_hand(_activation_energy[id] - 4);
-        _activation_energy[id] = 4;
-    }
+    _link_value[id] += increment;
 }
 void game_controller::clean_exploration_progress()
 {

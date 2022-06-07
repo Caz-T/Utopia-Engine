@@ -26,6 +26,20 @@ private slots:
 
     void on_menu_button_clicked();
 
+    void on_artifact_button_1_clicked();
+    void on_artifact_button_2_clicked();
+    void on_artifact_button_3_clicked();
+    void on_artifact_button_4_clicked();
+    void on_artifact_button_5_clicked();
+    void on_artifact_button_6_clicked();
+
+    void on_link_button_1_clicked();
+    void on_link_button_2_clicked();
+    void on_link_button_3_clicked();
+    void on_link_button_4_clicked();
+    void on_link_button_5_clicked();
+    void on_link_button_6_clicked();
+
 private:
     Ui::worktable_panel *ui;
 
