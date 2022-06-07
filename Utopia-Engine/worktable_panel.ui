@@ -1009,6 +1009,37 @@
     <string>存档并退出</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="final_button">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>330</y>
+     <width>281</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>36</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>启动乌托邦引擎</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="recharge_tool">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>重新充能工具</string>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="resources/resources.qrc"/>

@@ -40,6 +40,8 @@ private slots:
     void on_link_button_5_clicked();
     void on_link_button_6_clicked();
 
+    void on_recharge_tool_clicked();
+
 private:
     Ui::worktable_panel *ui;
 

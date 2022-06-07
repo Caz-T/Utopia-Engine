@@ -38,6 +38,8 @@ private slots:
 
     void on_menu_button_clicked();
 
+    void on_recharge_tool_clicked();
+
 private:
     Ui::exploration_panel *ui;
 

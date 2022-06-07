@@ -3,6 +3,7 @@
 
 #include "link_dialog.h"
 #include "activation_dialog.h"
+#include "recharge_tool_dialog.h"
 
 #include <QInputDialog>
 
@@ -11,8 +12,6 @@ worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
     ui(new Ui::worktable_panel)
 {
     ui->setupUi(this);
-
-
 
     refresh_panel();
     this->hide(); // by default everything is hidden when created
@@ -104,6 +103,22 @@ void worktable_panel::refresh_panel()
         for (auto& button : link_buttons) button->hide();
         for (auto& label : link_labels) label->hide();
     }
+
+    // show recharge tool belt button
+    if (game->artifact_status(5) == 2) ui->recharge_tool->show();
+    else ui->recharge_tool->hide();
+
+    // show final button.
+    flag = true;
+    for (int i = 0; i < 6; i++)
+        if (game->link_value(i) == -1)
+        {
+            flag = false;
+            break;
+        }
+    if (flag) ui->final_button->show();
+    else ui->final_button->hide();
+
     panel::refresh_panel();
 }
 
@@ -192,4 +207,12 @@ void worktable_panel::on_link_button_3_clicked() {link(2);}
 void worktable_panel::on_link_button_4_clicked() {link(3);}
 void worktable_panel::on_link_button_5_clicked() {link(4);}
 void worktable_panel::on_link_button_6_clicked() {link(5);}
+
+
+void worktable_panel::on_recharge_tool_clicked()
+{
+    recharge_tool_dialog dlg(game, this);
+    dlg.exec();
+    refresh_panel();
+}
 

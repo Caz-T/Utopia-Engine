@@ -1877,6 +1877,19 @@
     <string>存档并退出</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="recharge_tool">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>重新充能工具</string>
+   </property>
+  </widget>
   <zorder>calendar_label</zorder>
   <zorder>days_left</zorder>
   <zorder>peak_button</zorder>
@@ -1983,6 +1996,7 @@
   <zorder>label_48</zorder>
   <zorder>camp_button</zorder>
   <zorder>menu_button</zorder>
+  <zorder>recharge_tool</zorder>
  </widget>
  <resources>
   <include location="resources/resources.qrc"/>

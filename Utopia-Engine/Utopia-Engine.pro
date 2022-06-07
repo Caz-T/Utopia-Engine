@@ -19,6 +19,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     panel.cpp \
+    recharge_tool_dialog.cpp \
     worktable_panel.cpp
 
 HEADERS += \
@@ -32,6 +33,7 @@ HEADERS += \
     link_dialog.h \
     mainwindow.h \
     panel.h \
+    recharge_tool_dialog.h \
     worktable_panel.h
 
 FORMS += \
@@ -41,6 +43,7 @@ FORMS += \
     exploration_panel.ui \
     link_dialog.ui \
     mainwindow.ui \
+    recharge_tool_dialog.ui \
     worktable_panel.ui
 
 # Default rules for deployment.

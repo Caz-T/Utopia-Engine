@@ -1,5 +1,8 @@
 #include "exploration_panel.h"
 #include "ui_exploration_panel.h"
+
+#include "recharge_tool_dialog.h"
+
 #include <QDebug>
 #include <QInputDialog>
 
@@ -241,5 +244,13 @@ void exploration_panel::on_camp_button_clicked()
 void exploration_panel::on_menu_button_clicked()
 {
     show_menu();
+}
+
+
+void exploration_panel::on_recharge_tool_clicked()
+{
+    recharge_tool_dialog dlg(game, this);
+    dlg.exec();
+    refresh_panel();
 }
 
