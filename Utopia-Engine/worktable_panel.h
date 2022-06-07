@@ -42,6 +42,8 @@ private slots:
 
     void on_recharge_tool_clicked();
 
+    void on_final_button_clicked();
+
 private:
     Ui::worktable_panel *ui;
 

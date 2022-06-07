@@ -4,6 +4,7 @@
 #include "link_dialog.h"
 #include "activation_dialog.h"
 #include "recharge_tool_dialog.h"
+#include "final_activation_dialog.h"
 
 #include <QInputDialog>
 
@@ -214,5 +215,19 @@ void worktable_panel::on_recharge_tool_clicked()
     recharge_tool_dialog dlg(game, this);
     dlg.exec();
     refresh_panel();
+}
+
+
+void worktable_panel::on_final_button_clicked()
+{
+    QMessageBox msg;
+    msg.setText("乌托邦引擎的六个组件和六处链接静静立在工作室内。\n你准备好开始最后的激活了吗？\n一旦激活开始就无法终止，直到乌托邦引擎被成功激活或者你死去。");
+    msg.setText("最终确认");
+    msg.setStandardButtons(QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel);
+    if (msg.exec() == QMessageBox::StandardButton::Ok)
+    {
+        final_activation_dialog dlg(game, this);
+        dlg.exec();
+    }
 }
 

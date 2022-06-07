@@ -30,7 +30,7 @@ int game_controller::activation_energy(int code) const {return _activation_energ
 int game_controller::activation_attempt(int code) const {return _activation_attempt[code];}
 int game_controller::wastebasket_slots() const {return _wastebasket_slots;}
 
-bool game_controller::change_hp(int count)
+bool game_controller::change_hp(int count, bool flag)
 {
     _hp += count;
     if (_hp < 0)
@@ -43,7 +43,7 @@ bool game_controller::change_hp(int count)
     }
     else if (_hp == 0)
     {
-        recover_from_unconsciousness();
+        if (flag) recover_from_unconsciousness();
         return true;
     }
     else if (_hp > 6)
@@ -266,4 +266,9 @@ void game_controller::increase_activate_energy(int id, int increment)
             _activation_energy[id] = 4;
         }
     }
+}
+
+void game_controller::succeed()
+{
+    emit game_end("你好，未来。", "乌托邦引擎启动了。\n\n你看到太阳正如它先前几千亿次那样从东方的地平线上冉冉升起。\n\n人类正是如此顽强的物种。");
 }

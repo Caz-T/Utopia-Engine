@@ -10,8 +10,6 @@ class game_controller : public QObject
 public:
     explicit game_controller(QObject *parent = nullptr);
 
-
-
 public:
     // getters
     // each XXX() returns the value of _XXX
@@ -36,7 +34,7 @@ public:
 
 
     // some setters, each completing its own logic
-    bool change_hp(int count); // default = false. True means character unconscious. if character dies, this function just kills the game
+    bool change_hp(int count, bool quit_on_coma = true); // default = false. True means character unconscious. if character dies, this function just kills the game
     void charge_god_hand(int increment);
     void rest(int days, bool is_at_worktable);
     void day_progress(int count = 1);
@@ -63,6 +61,8 @@ public:
     void use_tool(int tool_id, bool flag = false);
     void use_seal_of_balance(int loc);
     void use_the_ancient_record();
+
+    void succeed();
 
 
 public slots:
@@ -119,20 +119,11 @@ private:
     int _activation_attempt[6] = {0}; // attempts to activate the artifact
     int _wastebasket_slots = 10; // remaining boxes in the wastebasket
 
-
-
     // data part ended
 
     // private setters:
     void reroll_events();
     void recover_from_unconsciousness();
-
-
-
-
-
-
-
 
 signals:
     int game_end(QString title, QString explanation); // passes a string to MainWindow's slot

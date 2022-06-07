@@ -14,6 +14,7 @@ SOURCES += \
     dice.cpp \
     exploration_dialog.cpp \
     exploration_panel.cpp \
+    final_activation_dialog.cpp \
     game_controller.cpp \
     link_dialog.cpp \
     main.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     dice.h \
     exploration_dialog.h \
     exploration_panel.h \
+    final_activation_dialog.h \
     game_controller.h \
     link_dialog.h \
     mainwindow.h \
@@ -41,6 +43,7 @@ FORMS += \
     battle_dialog.ui \
     exploration_dialog.ui \
     exploration_panel.ui \
+    final_activation_dialog.ui \
     link_dialog.ui \
     mainwindow.ui \
     recharge_tool_dialog.ui \
