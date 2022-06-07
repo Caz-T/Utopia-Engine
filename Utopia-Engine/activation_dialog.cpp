@@ -46,7 +46,7 @@ void activation_dialog::update_status()
     // update numbers
     for (i = 0; i < 8; i++)
     {
-        if (numbers[i] == 0)
+        if (numbers[i] != 0)
         {
             dice::show_dice_result(number_labels[i], numbers[i]);
             number_labels[i]->show();
@@ -162,6 +162,7 @@ void activation_dialog::button_candy(int i)
             if (game->change_hp(-1))
             {
                 setResult(0);
+                if (game->activation_attempt(artifact_number) == 0) game->increase_activate_energy(artifact_number, -1);
                 return;
             }
             break;
@@ -173,6 +174,9 @@ void activation_dialog::button_candy(int i)
     if (flag)
     {
         game->increase_activate_attempt(i);
+        QMessageBox msg;
+        msg.setText("你轻轻放下手中盈满能量的神器。");
+        msg.exec();
         done(total_energy());
     }
     else
@@ -202,5 +206,18 @@ void activation_dialog::on_abort_button_clicked()
     msg.setText("你确定要放弃激活此神器吗？\n本次激活中所有的能量将会消失，进度将会重置。");
     msg.setStandardButtons(QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel);
     if (msg.exec() == QMessageBox::StandardButton::Ok) done(0);
+}
+
+
+void activation_dialog::on_roll_button_clicked()
+{
+    ui->roll_button->hide();
+    result_1 = d6->roll();
+    result_2 = d6->roll();
+    dice::show_dice_result(ui->die_result_1, result_1);
+    dice::show_dice_result(ui->die_result_2, result_2);
+    for (int i = 0 ; i < 6; i++)
+        if (numbers[i] == 0)
+            number_buttons[i]->show();
 }
 

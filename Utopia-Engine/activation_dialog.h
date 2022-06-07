@@ -51,6 +51,7 @@ private slots:
     void on_number_button_7_clicked();
     void on_number_button_8_clicked();
     void on_abort_button_clicked();
+    void on_roll_button_clicked();
 };
 
 #endif // ACTIVATION_DIALOG_H
