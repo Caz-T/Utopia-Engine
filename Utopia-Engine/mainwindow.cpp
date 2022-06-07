@@ -64,7 +64,6 @@ void MainWindow::switch_panel(int panel_code, panel* sender)
 
 void MainWindow::on_start_button_clicked()
 {
-    qDebug() << "start_button_clicked";
     game = new game_controller(this);
     worktable = new worktable_panel(game, this);
     exploration = new exploration_panel(game, this);
@@ -91,6 +90,9 @@ void MainWindow::on_load_button_clicked()
     }
     worktable = new worktable_panel(game, this);
     exploration = new exploration_panel(game, this);
+    connect(worktable, SIGNAL(switch_panel_signal(int,panel*)), this, SLOT(switch_panel(int,panel*)));
+    connect(exploration, SIGNAL(switch_panel_signal(int,panel*)), this, SLOT(switch_panel(int,panel*)));
+    connect(game, SIGNAL(game_end(QString,QString)), this, SLOT(game_end(QString,QString)));
 
     worktable->close_panel();
     exploration->close_panel();

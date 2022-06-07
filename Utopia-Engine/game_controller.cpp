@@ -25,6 +25,7 @@ bool game_controller::treasure_found(int code) const {return _treasure_found[cod
 bool game_controller::seal_of_balance_available() const {return _seal_of_balance_available;}
 bool game_controller::the_ancient_record_abailable() const {return _the_ancient_record_available;}
 int game_controller::link_value(int code) const {return _link_value[code];}
+int game_controller::link_number(int link_id, int order) const {return _link_numbers[link_id][order];}
 int game_controller::activation_energy(int code) const {return _activation_energy[code];}
 int game_controller::activation_attempt(int code) const {return _activation_attempt[code];}
 int game_controller::wastebasket_slots() const {return _wastebasket_slots;}
@@ -55,7 +56,7 @@ bool game_controller::change_hp(int count)
 bool game_controller::save_game()
 {
     // IMPLEMENT ask for savename
-    QFile tempsave("save.txt");
+    QFile tempsave("/Users/casorazitora/Desktop/save.txt");
     if (!tempsave.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
     QTextStream saveout(&tempsave);
 
@@ -66,8 +67,9 @@ bool game_controller::save_game()
     for (int i = 0; i <= 3; i++) saveout << _event_location[i] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _artifact_status[i] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << (_treasure_found[i] ? 1 : 0) << ' '; saveout << Qt::endl;
-    saveout << (_seal_of_balance_available ? 1 : 0) << (_the_ancient_record_available ? 1 : 0) << Qt::endl;
+    saveout << (_seal_of_balance_available ? 1 : 0) << ' ' << (_the_ancient_record_available ? 1 : 0) << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _link_value[i] << ' '; saveout << Qt::endl;
+    for (int i = 0; i <= 5; i++) for (int j = 0; j <= 5; j++) saveout << _link_numbers[i][j] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _activation_energy[i] << ' '; saveout << Qt::endl;
     for (int i = 0; i <= 5; i++) saveout << _activation_attempt[i] << ' '; saveout << Qt::endl;
     saveout << _wastebasket_slots << Qt::endl;
@@ -78,7 +80,7 @@ bool game_controller::save_game()
 bool game_controller::load_game()
 {
     //IMPLEMENT ask for load name
-    QFile tempload("save.txt");
+    QFile tempload("/Users/casorazitora/Desktop/save.txt");
     if (!tempload.open(QIODevice::ReadOnly | QIODevice::Text)) return false;
     QTextStream loadin(&tempload);
     int num;
@@ -90,23 +92,26 @@ bool game_controller::load_game()
         loadin >> _god_hand; if (_god_hand < 0 or _god_hand > 6) throw 3;
         loadin >> _position; if (_position < 0 or _position > 2) throw 15;
         for (int i = 0; i <= 5; i++) {loadin >> _storage[i]; if (_storage[i] < 0 or _storage[i] > 4) throw 4;}
-        for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_tool_available[i] = true; break; case 0:_tool_available[i] = false; break; default: throw 5;}}
+        for (int i = 0; i <= 2; i++) {loadin >> num; switch(num){case 1:_tool_available[i] = true; break; case 0:_tool_available[i] = false; break; default: throw 5;}}
         for (int i = 0; i <= 5; i++) {loadin >> _expl_progress[i]; if (_expl_progress[i] < 0 or _expl_progress[i] > 6) throw 6;}
-        for (int i = 0; i <= 3; i++) {loadin >> _event_location[i]; if (_event_location[i] < 0 or _event_location[i] > 6) throw 7;}
+        for (int i = 0; i <= 3; i++) {loadin >> _event_location[i]; if (_event_location[i] < -1 or _event_location[i] > 5) throw 7;}
         for (int i = 0; i <= 5; i++) {loadin >> _artifact_status[i]; if (_artifact_status[i] < 0 or _artifact_status[i] > 2) throw 8;}
         for (int i = 0; i <= 5; i++) {loadin >> num; switch(num){case 1:_treasure_found[i] = true; break; case 0:_treasure_found[i] = false; break; default: throw 9;}}
         loadin >> num; switch(num){case 1:_seal_of_balance_available = true; break; case 0:_seal_of_balance_available = false; break; default: throw 10;}
         loadin >> num; switch(num){case 1:_the_ancient_record_available = true; break; case 0:_the_ancient_record_available = false; break; default: throw 11;}
         for (int i = 0; i <= 5; i++) {loadin >> _link_value[i]; if (_link_value[i] < -1 or _link_value[i] > 15) throw 12;}
+        for (int i = 0; i <= 5; i++)
+            for (int j = 0; j <= 5; j++)
+                {loadin >> _link_numbers[i][j]; if (_link_numbers[i][j] < 0 or _link_numbers[i][j] > 6) throw 17;}
         for (int i = 0; i <= 5; i++) {loadin >> _activation_energy[i]; if (_activation_energy[i] < 0 or _activation_energy[i] > 4) throw 13;}
         for (int i = 0; i <= 5; i++) {loadin >> _activation_attempt[i]; if (_activation_attempt[i] < 0 or _activation_energy[i] > 2) throw 16;}
         loadin >> _wastebasket_slots; if (_wastebasket_slots < 0 or _wastebasket_slots > 10) throw 14;
     }
-    catch (...)
+    catch (int error_code)
     {
         QMessageBox msg;
         msg.setWindowTitle("存档读取错误");
-        msg.setText("读取存档时发生错误。是否重试，或直接开始新游戏？");
+        msg.setText(QString("读取存档时发生错误，错误代码：") + QString::number(error_code) + QString("。是否重试，或直接开始新游戏？"));
         msg.addButton("开始新游戏", QMessageBox::AcceptRole);
         msg.addButton("重试", QMessageBox::RejectRole);
         if (msg.exec() == QMessageBox::Accepted) load_game(); // IMPLEMENT fix this strange thing.
@@ -240,3 +245,31 @@ void game_controller::recover_from_unconsciousness()
     msg.exec();
 }
 void game_controller::increase_activate_attempt(int id) {_activation_attempt[id] ++;}
+void game_controller::set_link_number(int link_id, int order, int number)
+{
+    _link_numbers[link_id][order] = number;
+}
+void game_controller::dump_dice() {_wastebasket_slots--;}
+void game_controller::use_component(int id) {_storage[id]--;}
+void game_controller::increase_activate_energy(int id, int increment)
+{
+    _activation_energy[id] += increment;
+    if (_event_location[1] == id) // fleeting visions
+    {
+        if (_activation_energy[id] > 3)
+        {
+            activate_artifact(id);
+            charge_god_hand(_activation_energy[id] - 3);
+            _activation_energy[id] = 3;
+        }
+    }
+    else
+    {
+        if (_activation_energy[id] > 4)
+        {
+            activate_artifact(id);
+            charge_god_hand(_activation_energy[id] - 4);
+            _activation_energy[id] = 4;
+        }
+    }
+}

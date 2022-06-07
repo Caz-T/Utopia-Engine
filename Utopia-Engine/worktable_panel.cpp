@@ -1,6 +1,9 @@
 #include "worktable_panel.h"
 #include "ui_worktable_panel.h"
 
+#include "link_dialog.h"
+#include "activation_dialog.h"
+
 #include <QInputDialog>
 
 worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
@@ -133,3 +136,29 @@ void worktable_panel::on_menu_button_clicked()
     show_menu();
 }
 
+void worktable_panel::activate(int i)
+{
+    if (game->treasure_found(1) and game->activation_attempt(i) == 0) // bracelet of Ios
+    {
+        QMessageBox msg;
+        msg.setText(QString("你持有") + treasure_names_zh[1] + QString("，且这是此处的初次链接。\n你发现能量槽里已经有1点能量了。"));
+        msg.exec();
+        game->increase_activate_energy(i, 1);
+    }
+    activation_dialog act_dlg(game, i, this);
+    game->increase_activate_energy(i, act_dlg.exec());
+    if (game->activation_attempt(i) == 2 and game->artifact_status(i) == 1) // two tries but no activation
+    {
+        QMessageBox msg;
+        msg.setText("两次过后，你仍然没能启动此神器。好在拼拼凑凑，你发现有种蛮力方法可以强行激活它。\n你花了一整天，让神器焕发出了它应有的光芒。");
+        msg.setWindowTitle("强行激活");
+        game->day_progress();
+        game->activate_artifact(i);
+    }
+}
+
+void worktable_panel::link(int i)
+{
+    link_dialog dlg(game, i, this);
+    dlg.exec();
+}

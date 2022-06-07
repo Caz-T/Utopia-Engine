@@ -28,6 +28,10 @@ private slots:
 
 private:
     Ui::worktable_panel *ui;
+
+    void activate(int code);
+    void link(int code);
+
 };
 
 #endif // WORKTABLE_PANEL_H

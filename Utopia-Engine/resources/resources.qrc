@@ -10,6 +10,10 @@
         <file alias="cross">icons8-cross-mark-48.png</file>
         <file alias="circled_2">icons8-number-II.png</file>
         <file alias="circled_1">icons8-number-I.png</file>
+        <file alias="circled_3">icons8-number-III.png</file>
+        <file alias="circled_4">icons8-four-67.png</file>
+        <file alias="circled_5">icons8-five-67.png</file>
+        <file alias="star">icons8-star-48.png</file>
     </qresource>
     <qresource prefix="/dice">
         <file alias="3">dice/icons8-3-c-96.png</file>

@@ -29,6 +29,7 @@ public:
     bool seal_of_balance_available() const;
     bool the_ancient_record_abailable() const;
     int link_value(int code) const;
+    int link_number(int link_id, int order) const;
     int activation_energy(int code) const;
     int activation_attempt(int id) const;
     int wastebasket_slots() const;
@@ -38,6 +39,7 @@ public:
     bool change_hp(int count); // default = false. True means character unconscious. if character dies, this function just kills the game
     void charge_god_hand(int increment);
     void rest(int days, bool is_at_worktable);
+    void day_progress(int count = 1);
 
 
     // exploration-related
@@ -50,8 +52,11 @@ public:
     // worktable-related
     void activate_artifact(int id);
     void increase_activate_attempt(int id);
+    void increase_activate_energy(int id, int increment);
     void add_link_value(int id, int increment);
+    void set_link_number(int link_id, int order, int number);
     void dump_dice();
+    void use_component(int id);
 
 
     // usage of one-time stuff. for tools, setting flag to true means recharging it.
@@ -102,6 +107,14 @@ private:
 
     // worktable
     int _link_value[6] = {-1, -1, -1, -1, -1, -1}; // order is the same as components, -1 means not yet linked
+    int _link_numbers[6][6] = {
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0}
+    };
     int _activation_energy[6] = {0}; // the energy in activation slots
     int _activation_attempt[6] = {0}; // attempts to activate the artifact
     int _wastebasket_slots = 10; // remaining boxes in the wastebasket
@@ -111,7 +124,6 @@ private:
     // data part ended
 
     // private setters:
-    void day_progress(int count = 1);
     void reroll_events();
     void recover_from_unconsciousness();
 
