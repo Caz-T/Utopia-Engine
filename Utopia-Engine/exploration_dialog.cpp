@@ -50,7 +50,6 @@ void exploration_dialog::on_roll_button_clicked()
     result_2 = d6->roll();
     dice::show_dice_result(ui->die_result_1, result_1);
     dice::show_dice_result(ui->die_result_2, result_2);
-    roll_times ++;
     for (int i = 0 ; i < 6; i++)
         if (numbers[i] == 0)
             buttons[i]->setVisible(true);

@@ -37,7 +37,6 @@ private:
     dice* d6;
 
     int numbers[6] = {0};
-    int roll_times = 0;
     int location_id;
     int result_1, result_2;
 

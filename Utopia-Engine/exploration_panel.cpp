@@ -112,8 +112,6 @@ void exploration_panel::refresh_panel()
     QProgressBar* prog[6] = {ui->peak_bar, ui->peak_bar_2, ui->peak_bar_3, ui->peak_bar_4, ui->peak_bar_5, ui->peak_bar_6};
     for (i = 0; i < 6; i++) prog[i]->setValue(game->expl_progress(i));
 
-
-
     panel::refresh_panel();
 }
 
