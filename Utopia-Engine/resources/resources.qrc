@@ -14,6 +14,8 @@
         <file alias="circled_4">icons8-four-67.png</file>
         <file alias="circled_5">icons8-five-67.png</file>
         <file alias="star">icons8-star-48.png</file>
+        <file alias="explore_bg">explorebg.png</file>
+        <file alias="worktable_bg">worktablebg.png</file>
     </qresource>
     <qresource prefix="/dice">
         <file alias="3">dice/icons8-3-c-96.png</file>
