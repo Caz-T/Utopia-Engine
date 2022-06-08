@@ -7,6 +7,7 @@
 #include "final_activation_dialog.h"
 
 #include <QInputDialog>
+#include <QStringList>
 
 worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
     panel(gm, parent),
@@ -14,8 +15,19 @@ worktable_panel::worktable_panel(game_controller* gm, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    refresh_panel();
+    worktable_panel::refresh_panel();
     this->hide(); // by default everything is hidden when created
+
+    ui->use_ancient_record->setText(QString("使用") + treasure_names_zh[4]);
+
+    QLabel* arti_labels[6] = {ui->artifact_label_1, ui->artifact_label_2, ui->artifact_label_3, ui->artifact_label_4, ui->artifact_label_5, ui->artifact_label_6};
+    for (auto& lbl : arti_labels) lbl->setStyleSheet("QLabel {color: white}");
+    QLabel* link_labels[6] = {ui->link_label_1, ui->link_label_2, ui->link_label_3, ui->link_label_4, ui->link_label_5, ui->link_label_6};
+    for (auto& lbl : link_labels) lbl->setStyleSheet("QLabel {color: white}");
+    ui->calendar_label->setStyleSheet("QLabel {color: white}");
+    QLCDNumber* lcds[6] = {ui->compo_count_1, ui->compo_count_2, ui->compo_count_3, ui->compo_count_4, ui->compo_count_5, ui->compo_count_6};
+    for (auto& num : lcds) num->setStyleSheet("QLCDNumber {color: white}");
+
 }
 
 worktable_panel::~worktable_panel()
@@ -83,6 +95,7 @@ void worktable_panel::refresh_panel()
         }
     QLabel* link_labels[6] = {ui->link_label_1, ui->link_label_2, ui->link_label_3, ui->link_label_4, ui->link_label_5, ui->link_label_6};
     QPushButton* link_buttons[6] = {ui->link_button_1, ui->link_button_2, ui->link_button_3, ui->link_button_4, ui->link_button_5, ui->link_button_6};
+
     if (flag)
     {
         for (i = 0; i < 6; i++)
@@ -98,6 +111,9 @@ void worktable_panel::refresh_panel()
                 link_labels[i]->setText(QString("此处已经链接，链接值为") + QString::number(game->link_value(i)));
             }
         }
+        // also show ancient_record, if applicable
+        if (game->the_ancient_record_available()) ui->use_ancient_record->show();
+        else ui->use_ancient_record->hide();
     }
     else
     {
@@ -229,5 +245,37 @@ void worktable_panel::on_final_button_clicked()
         final_activation_dialog dlg(game, this);
         dlg.exec();
     }
+}
+
+
+void worktable_panel::on_use_ancient_record_clicked()
+{
+    QInputDialog dlg;
+    dlg.setInputMode(QInputDialog::TextInput);
+    dlg.setLabelText("请选择一处链接点，将它的链接值设为1:");
+    dlg.setOption(QInputDialog::UseListViewForComboBoxItems);
+    QStringList lst;
+    for (int i = 0; i < 6; i++)
+    {
+        if (game->link_value(i) > 1)
+        {
+            QString temp;
+            temp.append(QString::number(i + 1));
+            temp.append(component_names_zh[i]);
+            temp.append("链接，目前链接值：");
+            temp.append(QString::number(game->link_value(i)));
+            lst << temp;
+        }
+    }
+    dlg.setComboBoxItems(lst);
+    if (dlg.exec())
+    {
+        QString str = dlg.textValue();
+        int order = str[0].digitValue() - 1;
+        qDebug() << "selected" << order;
+        game->add_link_value(order, 1 - game->link_value(order));
+        game->use_the_ancient_record();
+    }
+    refresh_panel();
 }
 

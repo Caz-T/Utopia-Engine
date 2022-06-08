@@ -55,7 +55,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>24</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
    <property name="text">
@@ -657,6 +657,11 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -669,6 +674,11 @@
      <width>151</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -700,6 +710,11 @@
      <width>151</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -750,6 +765,11 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -762,6 +782,11 @@
      <width>151</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -793,6 +818,11 @@
      <width>151</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -838,6 +868,11 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -850,6 +885,11 @@
      <width>161</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -877,6 +917,11 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -903,6 +948,11 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
@@ -928,6 +978,11 @@
      <width>161</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -967,6 +1022,11 @@
      <width>161</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -1038,6 +1098,19 @@
    </property>
    <property name="text">
     <string>重新充能工具</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="use_ancient_record">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>171</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>使用the ancient record</string>
    </property>
   </widget>
  </widget>

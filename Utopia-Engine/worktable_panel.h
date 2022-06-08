@@ -44,6 +44,8 @@ private slots:
 
     void on_final_button_clicked();
 
+    void on_use_ancient_record_clicked();
+
 private:
     Ui::worktable_panel *ui;
 
