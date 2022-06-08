@@ -58,7 +58,7 @@ bool game_controller::change_hp(int count, bool flag)
 bool game_controller::save_game()
 {
 
-    QFile tempsave(QFileDialog::getSaveFileName(nullptr, "选择一个存档位置", "..", "文本文件 (*.txt)"));
+    QFile tempsave(QFileDialog::getSaveFileName(nullptr, "选择一个存档位置", "", "文本文件 (*.txt)"));
     if (!tempsave.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
     QTextStream saveout(&tempsave);
 
@@ -81,7 +81,7 @@ bool game_controller::save_game()
 }
 bool game_controller::load_game()
 {
-    QFile tempload(QFileDialog::getOpenFileName(nullptr, "选择一个存档", "..", "文本文件 (*.txt)"));
+    QFile tempload(QFileDialog::getOpenFileName(nullptr, "选择一个存档", "", "文本文件 (*.txt)"));
     if (!tempload.open(QIODevice::ReadOnly | QIODevice::Text)) return false;
     QTextStream loadin(&tempload);
     int num;
