@@ -115,6 +115,10 @@ void exploration_panel::refresh_panel()
     QProgressBar* prog[6] = {ui->peak_bar, ui->peak_bar_2, ui->peak_bar_3, ui->peak_bar_4, ui->peak_bar_5, ui->peak_bar_6};
     for (i = 0; i < 6; i++) prog[i]->setValue(game->expl_progress(i));
 
+    // show recharge button
+    if (game->artifact_status(5) == 2) ui->recharge_tool->show();
+    else ui->recharge_tool->hide();
+
     panel::refresh_panel();
 }
 
@@ -122,7 +126,7 @@ void exploration_panel::explore(int id)
 {
     game->proceed_exploration(id);
     exploration_dialog* dlg = new exploration_dialog(game, id, this);
-    int r = dlg->exec();;
+    int r = dlg->exec();
     qDebug() << "result=" << r;
     if (r == 0 and game->artifact_status(id) == 0) // perfect search
     {
@@ -169,7 +173,7 @@ void exploration_panel::explore(int id)
         if (game->treasure_found(2))
         {
             QMessageBox shimmer_judge;
-            shimmer_judge.setText("是遭遇战！\n你的烁影月链熠熠发光，似乎可以用它逃脱怪物的追猎。\n你是否要避免这场遭遇战？");
+            shimmer_judge.setText("你的烁影月链熠熠发光，似乎可以用它逃脱怪物的追猎。\n你是否要避免这场遭遇战？");
             shimmer_judge.exec();
             shimmer_judge.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
             into_fight = shimmer_judge.result() == QMessageBox::Cancel;
@@ -179,6 +183,14 @@ void exploration_panel::explore(int id)
             battle_dialog battle(game, id, encounter_level, this);
             battle.exec();
         }
+    }
+    if (game->expl_progress(id) == 0 and game->artifact_status(id) == 0)
+    {
+        QMessageBox msg;
+        msg.setText("连日的探索终有收获，无论如何你还是找到了");
+        msg.setText(msg.text() + artifact_names_zh[id]);
+        msg.exec();
+        game->find_artifact(id);
     }
     refresh_panel();
     delete dlg;

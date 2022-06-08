@@ -25,7 +25,7 @@ public:
     int artifact_status(int code) const;
     bool treasure_found(int code) const;
     bool seal_of_balance_available() const;
-    bool the_ancient_record_abailable() const;
+    bool the_ancient_record_available() const;
     int link_value(int code) const;
     int link_number(int link_id, int order) const;
     int activation_energy(int code) const;

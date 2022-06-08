@@ -23,7 +23,7 @@ int game_controller::event_location(int code) const {return _event_location[code
 int game_controller::artifact_status(int code) const {return _artifact_status[code];}
 bool game_controller::treasure_found(int code) const {return _treasure_found[code];}
 bool game_controller::seal_of_balance_available() const {return _seal_of_balance_available;}
-bool game_controller::the_ancient_record_abailable() const {return _the_ancient_record_available;}
+bool game_controller::the_ancient_record_available() const {return _the_ancient_record_available;}
 int game_controller::link_value(int code) const {return _link_value[code];}
 int game_controller::link_number(int link_id, int order) const {return _link_numbers[link_id][order];}
 int game_controller::activation_energy(int code) const {return _activation_energy[code];}
@@ -225,7 +225,7 @@ void game_controller::clean_exploration_progress()
 }
 void game_controller::rest(int days, bool is_at_worktable)
 {
-    for (int i = 0; i < days; i++) day_progress();
+    day_progress(days);
     change_hp(days + (is_at_worktable and days >= 3 ? 1 : 0));
 }
 void game_controller::recover_from_unconsciousness()
