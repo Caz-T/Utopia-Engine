@@ -40,54 +40,7 @@ void activation_dialog::update_hearts()
 }
 void activation_dialog::update_status()
 {
-    int i;
     update_hearts();
-
-    // update numbers
-    for (i = 0; i < 8; i++)
-    {
-        if (numbers[i] != 0)
-        {
-            dice::show_dice_result(number_labels[i], numbers[i]);
-            number_labels[i]->show();
-            number_buttons[i]->hide();
-        }
-        else
-        {
-            number_labels[i]->hide();
-            number_buttons[i]->show();
-        }
-    }
-
-    // update result numbers
-    QLabel* result_labels[4] = {ui->result_label_1, ui->result_label_2, ui->result_label_3, ui->result_label_4};
-    for (i = 0; i < 4; i++)
-    {
-        switch(minus_results[i])
-        {
-        case 0:
-            result_labels[i]->hide();
-            break;
-        case 1:
-            result_labels[i]->setPixmap(QPixmap(":/circled_1"));
-            result_labels[i]->setScaledContents(true);
-            result_labels[i]->show();
-            break;
-        case 2:
-            result_labels[i]->setPixmap(QPixmap(":/circled_2"));
-            result_labels[i]->setScaledContents(true);
-            result_labels[i]->show();
-            break;
-        case -1:
-            result_labels[i]->setPixmap(QPixmap(":/cross"));
-            result_labels[i]->setScaledContents(true);
-            result_labels[i]->show();
-            break;
-        default:
-            qDebug() << "error in minus results" << i << ":" << minus_results[i] << Qt::endl;
-            break;
-        }
-    }
 
     // show tool status
     if (game->tool_available(0))
@@ -136,29 +89,26 @@ void activation_dialog::button_candy(int i)
         result_1 = 0;
         ui->die_result_1->hide();
     }
-    if (numbers[opposite_number] == numbers[i])
+    if (numbers[opposite_number] != 0)
     {
-        numbers[i] = 0;
-        numbers[opposite_number] = 0;
-    }
-    else if (numbers[opposite_number] != 0)
-    {
-        switch(i >= 4 ? numbers[i] - numbers[opposite_number] : numbers[opposite_number] - numbers[i])
+        int small_num = i >= 4 ? i - 4 : i;
+        switch(i <= 3 ? numbers[i] - numbers[opposite_number] : numbers[opposite_number] - numbers[i])
         {
         case 5:
-            minus_results[i >= 4 ? i - 4 : i] = 2;
+            minus_results[small_num] = 2;
             break;
         case 4:
-            minus_results[i >= 4 ? i - 4 : i] = 1;
+            minus_results[small_num] = 1;
             break;
         case 3:case 2:case 1:
-            minus_results[i >= 4 ? i - 4 : i] = -1;
+            minus_results[small_num] = -1;
+            break;
         case 0:
             numbers[i] = 0;
             numbers[opposite_number] = 0;
             break;
         default:
-            minus_results[i >= 4 ? i - 4 : i] = -1;
+            minus_results[small_num] = -1;
             if (game->change_hp(-1))
             {
                 setResult(0);
@@ -169,8 +119,7 @@ void activation_dialog::button_candy(int i)
         }
     }
     bool flag = true;
-    for (auto p : numbers) if (p == 0) flag = false;
-    update_status();
+    for (auto p : numbers) if (p == 0) flag = false;  
     if (flag)
     {
         game->increase_activate_attempt(i);
@@ -181,6 +130,50 @@ void activation_dialog::button_candy(int i)
     }
     else
     {
+        update_status();
+        for (i = 0; i < 8; i++)
+        {
+            qDebug() << "numbers[" << i << "] = " << numbers[i];
+            if (numbers[i] != 0)
+            {
+                dice::show_dice_result(number_labels[i], numbers[i]);
+                number_labels[i]->show();
+                number_buttons[i]->hide();
+            }
+            else
+            {
+                number_labels[i]->hide();
+                number_buttons[i]->show();
+            }
+        }
+        QLabel* result_labels[4] = {ui->result_label_1, ui->result_label_2, ui->result_label_3, ui->result_label_4};
+        for (i = 0; i < 4; i++)
+        {
+            switch(minus_results[i])
+            {
+            case 0:
+                result_labels[i]->hide();
+                break;
+            case 1:
+                result_labels[i]->setPixmap(QPixmap(":/circled_1"));
+                result_labels[i]->setScaledContents(true);
+                result_labels[i]->show();
+                break;
+            case 2:
+                result_labels[i]->setPixmap(QPixmap(":/circled_2"));
+                result_labels[i]->setScaledContents(true);
+                result_labels[i]->show();
+                break;
+            case -1:
+                result_labels[i]->setPixmap(QPixmap(":/cross"));
+                result_labels[i]->setScaledContents(true);
+                result_labels[i]->show();
+                break;
+            default:
+                qDebug() << "error in minus results" << i << ":" << minus_results[i] << Qt::endl;
+                break;
+            }
+        }
         if (result_1 == 0 and result_2 == 0)
         {
             ui->roll_button->show();
@@ -216,7 +209,7 @@ void activation_dialog::on_roll_button_clicked()
     result_2 = d6->roll();
     dice::show_dice_result(ui->die_result_1, result_1);
     dice::show_dice_result(ui->die_result_2, result_2);
-    for (int i = 0 ; i < 6; i++)
+    for (int i = 0 ; i < 8; i++)
         if (numbers[i] == 0)
             number_buttons[i]->show();
 }

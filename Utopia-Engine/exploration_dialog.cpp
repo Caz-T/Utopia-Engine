@@ -7,7 +7,7 @@ exploration_dialog::exploration_dialog(game_controller* gm, int id, QWidget *par
     QDialog(parent),
     ui(new Ui::exploration_dialog),
     game(gm),
-    d6(new dice),
+    d6(new dice(this)),
     location_id(id)
 {
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
@@ -39,7 +39,6 @@ exploration_dialog::exploration_dialog(game_controller* gm, int id, QWidget *par
 
 exploration_dialog::~exploration_dialog()
 {
-    delete d6;
     delete ui;
 }
 
@@ -102,8 +101,7 @@ void exploration_dialog::button_candy(int i)
             msg->setText(QString("触发了本地点的事件：好运气，可以至多将探索结果减少10。\n当前探索结果是") + QString::number(expl_result) +
                          QString("，你是否想要减少到") + QString::number(expl_result - 10 < 0 ? 0 : expl_result - 10) + QString("？"));
             msg->setWindowTitle("是否使用好运气？");
-            msg->exec();
-            if (msg->result() == 1)
+            if (msg->exec() == QMessageBox::Ok)
             {
                 expl_result -= 10;
                 if (expl_result <= 0)
@@ -121,8 +119,7 @@ void exploration_dialog::button_candy(int i)
             msg->setText(QString("你的神器隐士之镜已经激活，可以至多将探索结果减少10。\n当前探索结果是") + QString::number(expl_result) +
                          QString("，你是否想要减少到") + QString::number(expl_result - 10 < 0 ? 0 : expl_result - 10) + QString("？"));
             msg->setWindowTitle("是否使用隐士之镜？");
-            msg->exec();
-            if (msg->result() == 1)
+            if (msg->exec() == QMessageBox::Ok)
             {
                 expl_result -= 10;
                 if (expl_result <= 0)
@@ -140,8 +137,7 @@ void exploration_dialog::button_candy(int i)
             msg->setText(QString("你的神器预示棱镜已经激活，可以至多将探索结果减少10。\n当前探索结果是") + QString::number(expl_result) +
                          QString("，你是否想要减少到") + QString::number(expl_result - 10 < 0 ? 0 : expl_result - 10) + QString("？"));
             msg->setWindowTitle("是否使用预示棱镜？");
-            msg->exec();
-            if (msg->result() == 1)
+            if (msg->exec() == QMessageBox::Ok)
             {
                 expl_result -= 10;
                 if (expl_result <= 0)

@@ -124,7 +124,7 @@ void exploration_panel::explore(int id)
     exploration_dialog* dlg = new exploration_dialog(game, id, this);
     int r = dlg->exec();;
     qDebug() << "result=" << r;
-    if (r == 0) // perfect search
+    if (r == 0 and game->artifact_status(id) == 0) // perfect search
     {
         game->find_artifact(id);
         game->activate_artifact(id);
@@ -133,14 +133,14 @@ void exploration_panel::explore(int id)
         msg.setText("完美的探索！你找到了已经激活的神器，外加五点神之手能量！");
         msg.exec();
     }
-    else if (r >= 1 and r <= 10)
+    else if (r >= 1 and r <= 10 and game->artifact_status(id) == 0)
     {
         game->find_artifact(id);
         QMessageBox msg;
         msg.setText("很棒的探索！你找到了此区域的神器！");
         msg.exec();
     }
-    else if (r >= 11 and r <= 99)
+    else if ((r >= 11 and r <= 99) or (r <= 10 and r >= 0 and game->artifact_status(id) != 0))
     {
         game->find_component(id);
         QMessageBox msg;
@@ -150,8 +150,6 @@ void exploration_panel::explore(int id)
     else
     {
         QMessageBox msg;
-        QString msg_text = "是遭遇战！\n";
-        // IMPLEMENT battle hint
         if (r < 0) r = -r + 99;
         if (r > 555) r = 555;
         int encounter_level = r / 100;
@@ -160,6 +158,11 @@ void exploration_panel::explore(int id)
             encounter_level += 2;
             if (encounter_level > 5) encounter_level = 5;
         }
+        encounter_level -= 1;
+        QString msg_text = "是遭遇战！\n";
+        msg_text.append("对手是");
+        msg_text.append(monster_names_zh[id][encounter_level]);
+        msg_text.append("。");
         msg.setText(msg_text);
         msg.exec();
         bool into_fight = true;
