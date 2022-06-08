@@ -55,9 +55,11 @@ void MainWindow::switch_panel(int panel_code, panel* sender)
         break;
     case 1:
         exploration->refresh_panel();
+        setStyleSheet("#MainWindow {background-image: url(://explore_bg)}");
         break;
     case 2:
         worktable->refresh_panel();
+        setStyleSheet("#MainWindow {background-image: url(://worktable_bg)}");
         break;
     }
 }
