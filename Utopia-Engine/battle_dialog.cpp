@@ -170,10 +170,10 @@ void battle_dialog::on_loot_roll_clicked()
     int loot = d6->roll();
     dice::show_dice_result(ui->die_result_1, loot);
     QMessageBox msg;
-    msg.setText(QString("掷骰结果为") + QString::number(loot) + QString(loot <= level ? "，有掉落物！" : "，没有掉落物。"));
+    msg.setText(QString("掷骰结果为") + QString::number(loot) + QString(loot <= level + 1 ? "，有掉落物！" : "，没有掉落物。"));
     if (loot <= level)
     {
-        if (level == 5)
+        if (level == 4)
         {
             msg.setText(msg.text() + QString("\n你击败了传说级怪物，获得了宝藏" + treasure_names_zh[region] + QString("!")));
             game->find_treasure(region);

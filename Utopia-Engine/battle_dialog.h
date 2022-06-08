@@ -33,7 +33,7 @@ private slots:
 private:
     Ui::battle_dialog *ui;
     game_controller* game;
-    int level;
+    int level; // consistent with INDEX, rather than with ACTUAL LEVEL
     int region;
     int dice_modification = 0;
 

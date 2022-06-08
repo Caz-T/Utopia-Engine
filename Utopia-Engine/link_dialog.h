@@ -13,6 +13,7 @@ class link_dialog : public QDialog
 {
     Q_OBJECT
 
+
 public:
     explicit link_dialog(game_controller* gm, int link_id, QWidget *parent = nullptr);
     ~link_dialog();
