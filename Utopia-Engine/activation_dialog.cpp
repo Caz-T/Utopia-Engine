@@ -13,11 +13,14 @@ activation_dialog::activation_dialog(game_controller* gm, int order, QWidget *pa
     int i;
     ui->setupUi(this);
 
+    ui->energy_bar->setValue(game->activation_energy(artifact_number));
+
     // please don't ask why these are written this way. Special purposes.
     QLabel* temp_label_store[8] = {ui->number_label_1, ui->number_label_2, ui->number_label_3, ui->number_label_4, ui->number_label_5, ui->number_label_6, ui->number_label_7, ui->number_label_8};
     for (i = 0; i < 8; i++) number_labels[i] = temp_label_store[i];
     QPushButton* temp_button_store[8] = {ui->number_button_1, ui->number_button_2, ui->number_button_3, ui->number_button_4, ui->number_button_5, ui->number_button_6, ui->number_button_7, ui->number_button_8};
     for (i = 0; i < 8; i++) number_buttons[i] = temp_button_store[i];
+    for (auto& button : number_buttons) button->hide();
 
     setWindowTitle(QString("正在尝试激活") + artifact_names_zh[order]);
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
@@ -70,7 +73,7 @@ int activation_dialog::total_energy()
 {
     int ans = focus_used ? 2 : 0;
     for (auto& i : minus_results)
-        ans += i;
+        if (i > 0) ans += i;
     return ans;
 }
 
@@ -122,9 +125,9 @@ void activation_dialog::button_candy(int i)
     for (auto p : numbers) if (p == 0) flag = false;  
     if (flag)
     {
-        game->increase_activate_attempt(i);
+        game->increase_activate_attempt(artifact_number);
         QMessageBox msg;
-        msg.setText("你轻轻放下手中盈满能量的神器。");
+        msg.setText("你轻轻放下手中注有能量的神器。");
         msg.exec();
         done(total_energy());
     }
