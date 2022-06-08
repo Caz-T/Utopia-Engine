@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QMessageBox>
+#include <QFileDialog>
+
 #include "dice.h"
 
 game_controller::game_controller(QObject *parent)
@@ -55,8 +57,8 @@ bool game_controller::change_hp(int count, bool flag)
 
 bool game_controller::save_game()
 {
-    // IMPLEMENT ask for savename
-    QFile tempsave("/Users/casorazitora/Desktop/save.txt");
+
+    QFile tempsave(QFileDialog::getSaveFileName(nullptr, "选择一个存档位置", "..", "文本文件 (*.txt)"));
     if (!tempsave.open(QIODevice::WriteOnly | QIODevice::Text)) return false;
     QTextStream saveout(&tempsave);
 
@@ -79,8 +81,7 @@ bool game_controller::save_game()
 }
 bool game_controller::load_game()
 {
-    //IMPLEMENT ask for load name
-    QFile tempload("/Users/casorazitora/Desktop/save.txt");
+    QFile tempload(QFileDialog::getOpenFileName(nullptr, "选择一个存档", "..", "文本文件 (*.txt)"));
     if (!tempload.open(QIODevice::ReadOnly | QIODevice::Text)) return false;
     QTextStream loadin(&tempload);
     int num;
