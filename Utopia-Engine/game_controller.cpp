@@ -105,7 +105,7 @@ bool game_controller::load_game()
             for (int j = 0; j <= 5; j++)
                 {loadin >> _link_numbers[i][j]; if (_link_numbers[i][j] < 0 or _link_numbers[i][j] > 6) throw 17;}
         for (int i = 0; i <= 5; i++) {loadin >> _activation_energy[i]; if (_activation_energy[i] < 0 or _activation_energy[i] > 4) throw 13;}
-        for (int i = 0; i <= 5; i++) {loadin >> _activation_attempt[i]; if (_activation_attempt[i] < 0 or _activation_energy[i] > 2) throw 16;}
+        for (int i = 0; i <= 5; i++) {loadin >> _activation_attempt[i]; if (_activation_attempt[i] < 0 or _activation_attempt[i] > 2) throw 16;}
         loadin >> _wastebasket_slots; if (_wastebasket_slots < 0 or _wastebasket_slots > 10) throw 14;
     }
     catch (int error_code)
@@ -115,7 +115,7 @@ bool game_controller::load_game()
         msg.setText(QString("读取存档时发生错误，错误代码：") + QString::number(error_code) + QString("。是否重试，或直接开始新游戏？"));
         msg.addButton("开始新游戏", QMessageBox::AcceptRole);
         msg.addButton("重试", QMessageBox::RejectRole);
-        if (msg.exec() == QMessageBox::Accepted) load_game(); // IMPLEMENT fix this strange thing.
+        if (msg.exec() == QMessageBox::Accepted) load_game(); // strange thing.
         else return false;
     }
     QMessageBox msg;

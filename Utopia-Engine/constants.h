@@ -42,10 +42,5 @@ const int player_attack[5] = {5, 6, 6, 6, 6};
 const QString event_names_zh[5] = {
     "", "活跃怪物", "幻梦预视", "好运气", "恶劣天气"
 };//^^ notice this empty string!!
-/*
-const QString mdsah[6] = {
-        "", "", "", "", "", ""
-}; // IMPLEMENT remove this: just a template
-*/
 
 #endif // CONSTANTS_H

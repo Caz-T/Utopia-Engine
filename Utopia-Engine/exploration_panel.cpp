@@ -268,4 +268,3 @@ void exploration_panel::on_recharge_tool_clicked()
     dlg.exec();
     refresh_panel();
 }
-

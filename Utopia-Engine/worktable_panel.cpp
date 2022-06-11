@@ -100,7 +100,7 @@ void worktable_panel::refresh_panel()
     {
         for (i = 0; i < 6; i++)
         {
-            if (game->link_value(i) == 0)
+            if (game->link_value(i) == -1)
             {
                 link_buttons[i]->show();
                 link_labels[i]->setText(QString("需要") + component_names_zh[i] + QString("进行链接。"));
@@ -278,4 +278,3 @@ void worktable_panel::on_use_ancient_record_clicked()
     }
     refresh_panel();
 }
-

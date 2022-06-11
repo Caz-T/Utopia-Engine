@@ -87,6 +87,10 @@ void MainWindow::on_load_button_clicked()
     if (!game->load_game())
     {
         delete game;
+        QMessageBox msg;
+        msg.setText("存档读取失败，将开始新游戏。");
+        msg.setWindowTitle("存档读取失败");
+        msg.exec();
         on_start_button_clicked();
         return;
     }
@@ -112,15 +116,9 @@ void MainWindow::hide_main_window()
 }
 void MainWindow::return_to_menu()
 {
-
-
     delete game;
-    exploration->close();
-    worktable->close();
-    // IMPLEMENT this is only a temporary fix.
 
     close();
-    //beginning();
 }
 void MainWindow::game_end(QString title, QString explanation)
 {

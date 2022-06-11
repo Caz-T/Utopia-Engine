@@ -26,6 +26,7 @@ final_activation_dialog::final_activation_dialog(game_controller* gm, QWidget *p
 
     difficulty = ans - dlg.intValue();
     ui->difficulty_label->setText(QString("最终激活难度：") + QString::number(difficulty));
+    update_hearts();
 }
 
 final_activation_dialog::~final_activation_dialog()
@@ -57,4 +58,3 @@ void final_activation_dialog::on_roll_button_clicked()
     }
     else game->change_hp(-1, false);
 }
-

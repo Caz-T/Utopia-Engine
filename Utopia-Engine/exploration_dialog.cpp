@@ -168,5 +168,3 @@ void exploration_dialog::on_pushButton_3_clicked() {button_candy(2);}
 void exploration_dialog::on_pushButton_4_clicked() {button_candy(3);}
 void exploration_dialog::on_pushButton_5_clicked() {button_candy(4);}
 void exploration_dialog::on_pushButton_6_clicked() {button_candy(5);}
-
-

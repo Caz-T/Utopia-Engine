@@ -93,6 +93,7 @@ void link_dialog::on_roll_button_clicked()
     for (int i = 0 ; i < 6; i++)
         if (game->link_number(link_number, i) == 0)
             number_buttons[i]->show();
+    if (game->wastebasket_slots() > 0) ui->discard_button->show();
 }
 
 void link_dialog::update_status()

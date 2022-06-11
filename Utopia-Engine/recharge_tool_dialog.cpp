@@ -64,4 +64,3 @@ void recharge_tool_dialog::on_choice_button_3_clicked() {button_candy(2);}
 void recharge_tool_dialog::on_choice_button_4_clicked() {button_candy(3);}
 void recharge_tool_dialog::on_choice_button_5_clicked() {button_candy(4);}
 void recharge_tool_dialog::on_choice_button_6_clicked() {button_candy(5);}
-
