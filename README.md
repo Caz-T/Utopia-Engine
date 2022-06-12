@@ -2,9 +2,9 @@
 
 This is an implementation of the famous Print-n'-play board game: Utopia Engine. More rules and usages are to be added here. 
 
-**Currently the application is playable, though with potential bugs.**
+This project has been submitted as my course project for OOP 2022 Spring, Tsinghua University.
 
-This project is to be submitted as the course work of me for OOP 2022 Spring, Tsinghua University.
+If you feel like refining any part of this game, feel free to start an issue!
 
 > For Hannah. For your future. For your inner Utopia.
 
@@ -31,6 +31,15 @@ Although the whole development process is solely done on my Mac, I'm quite sure 
 
 You need a Qt 6.3.0 package with windeployqt. Clone the source code repo, and follow the steps on https://doc.qt.io/qt-6/windows-deployment.html. 
 
+*Note: Some panels are found to be incorrectly set up on Windows. Performance might be undersatisfactory.*
+
+
+## How to play
+I apologize for not being able to elaborate on the detailed rules of the game. The game itself has a decent complexity (that's why I've been playing it for seven years and counting), so I suppose it should be left for each player to enjoy the fullest of exploring the game.
+
+The main idea is to start an ancient mythic machine called **The Utopia Engine** before doomsday descends upon mankind. You, Isodoros, probably the only human being capable of restarting the Utopia Engine, are to find six artifacts and assemble them so as to perpetually detain doomsday. Artifacts must be found, activated and properly linked to regain their power. Eventually you are also to do a final activation to start up the Engine. The more precise you link the artifacts, the easier it'll be to do the eventual activation.
+
+Basically it's a dice game. If you'd prefer the original offline game, all you need is just a pencil, a rubber, two six-sided dice and a printed version of the maps included in this repo.
 
 ## Credits
 
