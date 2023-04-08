@@ -54,6 +54,6 @@ Thanks to all contributors to the game design of Utopia Engine, and all players 
 
 ## Miscellaneous
 
-1. I hate the class name QDialog. It lured me into naming my classes xxx_dialog rather than xxx_dialog**ue**. BrE is the cancer of modern English.
+1. I hate the class name QDialog. It lured me into naming my classes xxx_dialog rather than xxx_dialog**ue**. NAmE is the cancer of modern English.
 2. It's been some painful weeks physically and mentally, which provides good excuse for not making my implementation half as elegent as the original game.
 3. DO NOT LEAVE A COURSE PROJECT TO ITS DEADLINE. OR YOU'LL DIE STRUGGLING.
